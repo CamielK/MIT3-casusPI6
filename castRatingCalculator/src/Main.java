@@ -25,13 +25,15 @@ public class Main {
             Statement stmt = conn.createStatement();
 
             //Enter the query
-            ResultSet results = stmt.executeQuery("SELECT imdbID,Director FROM data");
+            ResultSet results = stmt.executeQuery("SELECT imdbID FROM data");
+            //ResultSet results = stmt.executeQuery("SELECT imdbID,Director FROM data");
 
             //handle threads
-            ExecutorService executor = Executors.newFixedThreadPool(50);
+            ExecutorService executor = Executors.newFixedThreadPool(1);
             while (results.next()) {
                 //start new thread
-                Runnable worker = new WorkerThread(results.getString("Director"), results.getString("imdbID"));
+                Runnable worker = new WorkerThread(results.getString("imdbID"));
+                //Runnable worker = new WorkerThread(results.getString("Director"), results.getString("imdbID"));
                 executor.execute(worker);
             }
 

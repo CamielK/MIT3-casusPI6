@@ -8,6 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class WorkerThread implements Runnable {
 
@@ -16,8 +19,12 @@ public class WorkerThread implements Runnable {
     private static Connection conn = null;
     private static int counter = 0;
 
-    public WorkerThread(String directorField, String imdbID){
-        this.command=directorField;
+    private String budget = "NF";
+    private String revenue = "NF";
+
+    //public WorkerThread(String directorField, String imdbID){
+    public WorkerThread(String imdbID){
+        //this.command=directorField;
         this.imdbID = imdbID;
 
         if (conn==null) {
@@ -42,9 +49,11 @@ public class WorkerThread implements Runnable {
     private void processCommand() {
         try {
 
-            String avrgDirectorRating = calculateAvrgDirectorRating(command);
+            //String avrgDirectorRating = calculateAvrgDirectorRating(command);
+            getMovieBudget();
 
-            addToNewCsvFile(imdbID + "," + avrgDirectorRating + "\n");
+            addToNewCsvFile(imdbID + "," + budget + "," + revenue + "\n");
+            //addToNewCsvFile(imdbID + "," + avrgDirectorRating + "\n");
 
 
         } catch (Exception e) {
@@ -63,7 +72,8 @@ public class WorkerThread implements Runnable {
             //handle results
             //System.out.print(row);
 
-            try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("resources/output.csv", true)))) {
+            //try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("resources/output.csv", true)))) {
+            try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("resources/output2.csv", true)))) {
                 out.print(row);
             }catch (IOException e) {
                 //exception handling left as an exercise for the reader
@@ -71,6 +81,50 @@ public class WorkerThread implements Runnable {
 
 
         } catch(Exception e) {e.printStackTrace();}
+
+    }
+
+
+
+    private void getMovieBudget() {
+        String apiUrl = "http://api.themoviedb.org/3/movie/"+imdbID+"?api_key=a9c6452cf540c66c984aabfb30bf16ef";
+
+
+        String response = "";
+        try {
+            final URL requestUrl = new URL(apiUrl);
+            URLConnection yc = requestUrl.openConnection();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            yc.getInputStream()));
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null)
+                //System.out.println(inputLine);
+                response += inputLine;
+            in.close();
+            Thread.sleep(350);
+
+            int budgetIndexStart = response.indexOf("\"budget\":")+9;
+            int budgetIndexEnd = response.indexOf(",\"genres\":");
+            budget = response.substring(budgetIndexStart, budgetIndexEnd);
+
+            int revenueIndexStart = response.indexOf("\"revenue\":")+10;
+            int revenueIndexEnd = response.indexOf(",\"runtime\":");
+            revenue = response.substring(revenueIndexStart, revenueIndexEnd);
+
+            //System.out.println(revenue);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            budget = "NF";
+            revenue = "NF";
+        }
+
+        //System.out.println(response);
+
+
 
     }
 
