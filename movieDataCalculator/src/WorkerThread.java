@@ -53,6 +53,10 @@ public class WorkerThread implements Runnable {
                 //establish static connection for all threads
                 conn = DriverManager.getConnection("jdbc:relique:csv:" + "resources");
             } catch (Exception e) {e.printStackTrace();}
+
+            //>>> output header: <<<
+            addToNewCsvFile("imdbID,English,Spanish,European,Asian,Arabic,Other\n");
+            //addToNewCsvFile("imdbID,Action,Adventure,Animation,Comedy,Biography,Crime,Drama,Documentary,Family,Fantasy,History,Horror,Mystery,Romance,Sci-Fi,Thriller,Western,Sport,Music,Musical,War\n");
         }
     }
 
@@ -94,17 +98,45 @@ public class WorkerThread implements Runnable {
             // (only use 1 at a time, switch other comments to the correct method aswell)
 
 
+            //create genre dummy variables
+//            List<String> movieGenres = getMovieGenres(command); //format: Action, Adventure, Animation, Comedy, Biography, Crime, Drama, Documentary, Family, Fantasy, History, Horror, Mystery, Romance, Sci-Fi, Thriller, Western, Sport, Music, Musical, War
+//            String outputRow = imdbID;
+//            for (String genre : movieGenres) {
+//                outputRow = outputRow + ("," + genre);
+//            }
+//            addToNewCsvFile(outputRow + "\n");
+
+
+
+            //create language dummy variables
+//            List<String> movieLanguages = getMovieLanguages(command); //format: English,Spanish,European,Asian,Arabic,Other
+//            String outputRow = imdbID;
+//            for (String genre : movieLanguages) {
+//                outputRow = outputRow + ("," + genre);
+//            }
+//            addToNewCsvFile(outputRow + "\n");
+
+
+            //create country dummy variables
+            List<String> movieCountrys = getMovieCountrys(command); //format: English,Spanish,European,Asian,Arabic,Other
+            String outputRow = imdbID;
+            for (String genre : movieCountrys) {
+                outputRow = outputRow + ("," + genre);
+            }
+            addToNewCsvFile(outputRow + "\n");
+
+
             //>>> fix movie info <<<
 //            List<String> movieInfo = fixMovieInfo(); //format: imdbID,Title,Year,Rating,Runtime,Genre,Released,Director,Writer,Cast,imdbRating,imdbVotes,language,country
 //            addToNewCsvFile(imdbID + ",\"" + movieInfo.get(0) + "\"," + movieInfo.get(1)  + ",\"" + movieInfo.get(2)  + "\",\"" + movieInfo.get(3)  + "\",\"" + movieInfo.get(4)  + "\",\"" + movieInfo.get(5)  + "\",\"" + movieInfo.get(6)  + "\",\"" + movieInfo.get(7)  + "\",\"" + movieInfo.get(8)  + "\",\"" + movieInfo.get(9)  + "\",\"" + movieInfo.get(10)  + "\",\"" + movieInfo.get(11) + "\",\""  + movieInfo.get(12) + "\"\n");
 
             //>>> calculate average cast rating: <<<
-            for (String target : targetImdbIDs) {
-                if (target.equals(imdbID)) {
-                    String avrgCastRating = calculateAvrgCastRating(command, "ratingCalcDatabase");
-                    addToNewCsvFile(imdbID + "," + avrgCastRating + "\n");
-                }
-            }
+//            for (String target : targetImdbIDs) {
+//                if (target.equals(imdbID)) {
+//                    String avrgCastRating = calculateAvrgCastRating(command, "ratingCalcDatabase");
+//                    addToNewCsvFile(imdbID + "," + avrgCastRating + "\n");
+//                }
+//            }
 
             //>>> calculate average writer rating: <<<
 //            for (String target : targetImdbIDs) {
@@ -155,6 +187,107 @@ public class WorkerThread implements Runnable {
 
         } catch(Exception e) {e.printStackTrace();}
 
+    }
+
+
+    //this method returns a list of strings with the movies genres
+    //format: Action, Adventure, Comedy, Biography, Crime, Drama, Documentary, Family, Fantasy, History, Horror, Mystery, Romance, Sci-Fi, Thriller, Western, Sport, Music, Musical, War
+    private List<String> getMovieGenres(String genreField){
+        List<String> genres = new ArrayList<String>();
+
+        if (genreField.contains("Action")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Adventure")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Animation")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Comedy")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Biography")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Crime")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Drama")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Documentary")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Family")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Fantasy")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("History")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Horror")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Mystery")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Romance")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Sci-Fi")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Thriller")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Western")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Sport")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Music")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("Musical")) {genres.add("1");} else {genres.add("0");}
+        if (genreField.contains("War")) {genres.add("1");} else {genres.add("0");}
+
+        boolean atleastOneGenre = false;
+        for (String genre : genres) {
+            if (genre.equals("1")) {
+                atleastOneGenre = true;
+            }
+        }
+
+        if (!atleastOneGenre) {
+            genres.set(0,"Error");
+        }
+
+        return genres;
+    }
+
+    //this method returns a list of strings with the movie language dummy variables
+    //format: English,Spanish,European,Asian,Arabic,Other
+    private List<String> getMovieLanguages(String languageField){
+        List<String> languages = new ArrayList<String>();
+
+        if (languageField.contains("English")  || languageField.contains("Irish") || languageField.contains("Scottish")) {languages.add("1");} else {languages.add("0");}
+        if (languageField.contains("Spanish") || languageField.contains("Portuguese")) {languages.add("1");} else {languages.add("0");}
+        if (languageField.contains("Dutch") || languageField.contains("French") || languageField.contains("German") || languageField.contains("Italian") || languageField.contains("Russian") || languageField.contains("Swedish") || languageField.contains("Danish") || languageField.contains("Finnish") || languageField.contains("Norwegian")) {languages.add("1");} else {languages.add("0");}
+        if (languageField.contains("Mandarin") || languageField.contains("Japanese") || languageField.contains("Chinese") || languageField.contains("Korean")) {languages.add("1");} else {languages.add("0");}
+        if (languageField.contains("Arabic") || languageField.contains("Hebrew") || languageField.contains("Persian") || languageField.contains("Persian")) {languages.add("1");} else {languages.add("0");}
+
+
+        boolean atleastOneLanguage = false;
+        for (String lang : languages) {
+            if (lang.equals("1")) {
+                atleastOneLanguage = true;
+            }
+        }
+
+        if (!atleastOneLanguage) {
+            languages.add("1"); //'other' language category is true
+        }
+        else {
+            languages.add("0"); //'other' language category is false
+        }
+
+        return languages;
+    }
+
+
+    //this method returns a list of strings with the movie country dummy variables
+    //format: English,Spanish,European,Asian,Arabic,Other
+    private List<String> getMovieCountrys(String countryField){
+        List<String> countrys = new ArrayList<String>();
+
+        if (countryField.contains("Canada")  || countryField.contains("Ireland") || countryField.contains("Scottland") || countryField.contains("USA") || countryField.contains("UK") || countryField.contains("Australia")) {countrys.add("1");} else {countrys.add("0");}
+        if (countryField.contains("Spain") || countryField.contains("Portugal") || countryField.contains("Argentina") || countryField.contains("Brazil")) {countrys.add("1");} else {countrys.add("0");}
+        if (countryField.contains("Netherlands") || countryField.contains("France") || countryField.contains("Germany") || countryField.contains("Italy") || countryField.contains("Russia") || countryField.contains("Sweden") || countryField.contains("Denmark") || countryField.contains("Finland") || countryField.contains("Norway")) {countrys.add("1");} else {countrys.add("0");}
+        if (countryField.contains("Taiwan") || countryField.contains("Japan") || countryField.contains("China") || countryField.contains("Korea")) {countrys.add("1");} else {countrys.add("0");}
+        if (countryField.contains("Qatar") || countryField.contains("United Arab Emirates") || countryField.contains("Israel") || countryField.contains("Persian")) {countrys.add("1");} else {countrys.add("0");}
+
+
+        boolean atleastOneCountry = false;
+        for (String country : countrys) {
+            if (country.equals("1")) {
+                atleastOneCountry = true;
+            }
+        }
+
+        if (!atleastOneCountry) {
+            countrys.add("1"); //'other' language category is true
+        }
+        else {
+            countrys.add("0"); //'other' language category is false
+        }
+
+        return countrys;
     }
 
 

@@ -40,12 +40,14 @@ public class Main {
             Statement stmt = conn.createStatement();
 
             //Enter the query
-            //ResultSet results = stmt.executeQuery("SELECT imdbID FROM data_unrated");
+            ResultSet results = stmt.executeQuery("SELECT imdbID,Country FROM mainDatabase");
+            //ResultSet results = stmt.executeQuery("SELECT imdbID,Language FROM mainDatabase");
+            //ResultSet results = stmt.executeQuery("SELECT imdbID,Genre FROM mainDatabase");
             //ResultSet results = stmt.executeQuery("SELECT imdbID,Director FROM ratingCalcDatabase WHERE imdbID = 'tt0103064'");
             //ResultSet results = stmt.executeQuery("SELECT imdbID,Director,Writer,Cast FROM ratingCalcDatabase WHERE imdbID = (SELECT imdbID FROM mainDatabase WHERE imdbID = 'tt0103064')");
             //ResultSet results = stmt.executeQuery("SELECT imdbID,Director FROM ratingCalcDatabase");
             //ResultSet results = stmt.executeQuery("SELECT imdbID,Writer FROM ratingCalcDatabase");
-            ResultSet results = stmt.executeQuery("SELECT imdbID,Cast FROM ratingCalcDatabase");
+            //ResultSet results = stmt.executeQuery("SELECT imdbID,Cast FROM ratingCalcDatabase");
             //ResultSet results = stmt.executeQuery("SELECT imdbID FROM data");
 
 
@@ -73,7 +75,10 @@ public class Main {
                 //Runnable worker = new WorkerThread(results.getString("imdbID"));
                 //Runnable worker = new WorkerThread(results.getString("Director"), results.getString("imdbID"));
                 //Runnable worker = new WorkerThread(results.getString("Writer"), results.getString("imdbID"));
-                Runnable worker = new WorkerThread(results.getString("Cast"), results.getString("imdbID"));
+                //Runnable worker = new WorkerThread(results.getString("Cast"), results.getString("imdbID"));
+                //Runnable worker = new WorkerThread(results.getString("Genre"), results.getString("imdbID"));
+                Runnable worker = new WorkerThread(results.getString("Country"), results.getString("imdbID"));
+                //Runnable worker = new WorkerThread(results.getString("Language"), results.getString("imdbID"));
                 //Runnable worker = new WorkerThread(results.getString("imdbID"));
                 executor.execute(worker);
             }
