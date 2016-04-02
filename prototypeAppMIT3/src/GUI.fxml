@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--    imports     -->
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!--    main grid   -->
+<GridPane alignment="center" hgap="10" styleClass="root" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIcontroller">
+    <stylesheets><URL value="@guiStyles.css" /></stylesheets>
+    <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
+    <!--<gridLinesVisible>true</gridLinesVisible>-->
+
+    <!--components-->
+    <children>
+
+
+        <!--intro text-->
+        <Text id="intro-header" text="Movie rating and revenue predictor" GridPane.columnIndex="0" GridPane.columnSpan="8" GridPane.rowIndex="0" />
+        <Text id="intro-text" text="${'Please enter movie info to predict its rating and revenue.\nUse the checkboxes to enable/disable certain predictor variables.\nDisabled predictors will not be used in the calculation.'}" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="8" />
+        <Separator id="seperator" orientation="HORIZONTAL" prefWidth="700" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="10"/>
+        <Separator id="seperator" orientation="VERTICAL" valignment="CENTER" prefHeight="500" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.rowSpan="10"/>
+
+        <!--    left input components      -->
+        <Text id="intro-text" text="Enter movie info here:" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="3" />
+
+        <!--movie title-->
+        <Label text="Movie title:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="titleInput" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+        <!--movie release year-->
+        <CheckBox fx:id="releaseCbx" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="Release year:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="releaseInput" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+        <!--movie runtime-->
+        <CheckBox fx:id="runtimeCbx" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="Runtime (min):" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="runtimeInput" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+
+        <!--movie mpaa rating-->
+        <CheckBox fx:id="mpaaCbx" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label text="MPAA rating:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <ComboBox fx:id="mpaaInput" GridPane.columnIndex="2" GridPane.rowIndex="7" prefWidth="200.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="G (all ages)" />
+                    <String fx:value="PG (parental guidance advised)" />
+                    <String fx:value="PG-13 (13+)" />
+                    <String fx:value="NC-17 (17+)" />
+                    <String fx:value="R (mature audiences)" />
+                    <String fx:value="UNRATED (no rating)" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!--movie budget-->
+        <CheckBox fx:id="budgetCbx" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <Label text="Budget (dollar):" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <TextField fx:id="budgetInput" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+
+        <!--movie genre-->
+
+
+        <!--movie director-->
+
+
+        <!--movie writer-->
+
+
+        <!--movie cast-->
+
+
+        <!--movie language-->
+
+
+        <!--movie country-->
+
+
+        <!--predict button-->
+        <HBox alignment="CENTER" spacing="0" GridPane.columnIndex="2" GridPane.rowIndex="10">
+            <Button onAction="#handleSubmitButtonAction" text="Predict movie ratings!"/>
+        </HBox>
+
+        <!--warning message-->
+        <Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+
+
+
+        <!--    right output components     -->
+        <Text id="intro-text" text="Calculation results:" GridPane.columnIndex="4" GridPane.rowIndex="3" GridPane.columnSpan="2" />
+        <Label text="Calculation progress: " GridPane.columnIndex="4" GridPane.rowIndex="4" />
+        <ProgressBar fx:id="progress" prefWidth="200" GridPane.columnIndex="5" GridPane.rowIndex="4" GridPane.columnSpan="2" progress="0"/>
+        <Label fx:id="progressStatus" text="Awaiting input..." GridPane.columnIndex="7" GridPane.rowIndex="4" />
+        <Label text="Average directors rating: " GridPane.columnIndex="4" GridPane.rowIndex="5" />
+        <Label fx:id="avgDirectorOutput" text="..." GridPane.columnIndex="5" GridPane.rowIndex="5" />
+        <Label text="Average writers rating: " GridPane.columnIndex="4" GridPane.rowIndex="6" />
+        <Label fx:id="avgWriterOutput" text="..." GridPane.columnIndex="5" GridPane.rowIndex="6" />
+        <Label text="Average cast rating: " GridPane.columnIndex="4" GridPane.rowIndex="7" />
+        <Label fx:id="avgCastOutput" text="..." GridPane.columnIndex="5" GridPane.rowIndex="7" />
+        <Label id="prediction-output" text="Predicted imdb rating: " GridPane.columnIndex="4" GridPane.rowIndex="9" GridPane.columnSpan="2"/>
+        <Label id="prediction-output" fx:id="ratingOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="9" />
+        <Label id="prediction-output" text="Predicted revenue: " GridPane.columnIndex="4" GridPane.rowIndex="10" GridPane.columnSpan="2"/>
+        <Label id="prediction-output" fx:id="revenueOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="10" />
+
+
+    </children>
+
+
+
+
+</GridPane>
