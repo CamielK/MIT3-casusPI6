@@ -1,7 +1,13 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainGUI extends Application {
@@ -15,7 +21,7 @@ public class MainGUI extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
 
-        Scene scene = new Scene(root, 1000, 500);
+        Scene scene = new Scene(root, 1000, 700);
 
         stage.setTitle("Movie predictor");
         stage.setScene(scene);

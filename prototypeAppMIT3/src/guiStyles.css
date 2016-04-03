@@ -25,7 +25,7 @@
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-font-family: "Arial Black";
-    -fx-fill: #333333;
+    -fx-fill: #2A5058;
     /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
 }
 
@@ -37,17 +37,12 @@
 }
 
 #seperator {
-    /*-fx-background-color: #333333;*/
-    -fx-border-color: #333333;
+    -fx-background-color: #2A5058;
+    /*-fx-border-color: #333333;*/
+    /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/
 }
 
 #prediction-output {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-}
-
-#actiontarget {
-    -fx-fill: FIREBRICK;
-    -fx-font-weight: bold;
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
