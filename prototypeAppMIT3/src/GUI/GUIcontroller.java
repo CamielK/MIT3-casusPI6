@@ -251,15 +251,16 @@ public class GUIcontroller implements Initializable {
             } catch (Exception e) { errorMessages.add("Invalid budget. Please enter a budget using only integers."); }
         }  else { inputData.add("Unused predictor"); }
 
-//        //check genre
-//        if (genreCbx.isSelected()) {
-//            if (true) { errorMessages.add("Please add at least 1 genre or uncheck this predictor"); }
-//            //if (genres.getSelectedItem().toString().contains("Add a genre")) { errorMessages.add("Please add at least 1 genre or uncheck this predictor"); }
-//            else {
-//                //genresList.
-//            }
-//        }  else { inputData.add("Unused predictor"); }
-//
+        //check genre
+        if (genreCbx.isSelected()) {
+            if (genreCombo.getSelectionModel().isEmpty()) { errorMessages.add("Please add at least 1 genre or uncheck this predictor"); }
+            else {
+                String genreString = "";
+                for (String genre : genreCombo.getItems()) { genreString = genreString + "," + genre; }
+                inputData.add(genreString);
+            }
+        }  else { inputData.add("Unused predictor"); }
+
 //        //check director
 //        if (directorCbx.isSelected() && directors.getSelectedItem().toString().contains("Add a genre")) {
 //            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
@@ -274,16 +275,26 @@ public class GUIcontroller implements Initializable {
 //        if (castCbx.isSelected() && cast.getSelectedItem().toString().contains("Add a genre")) {
 //            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
 //        }  else { inputData.add("Unused predictor"); }
-//
-//        //check language
-//        if (languageCbx.isSelected() && languages.getSelectedItem().toString().contains("Add a genre")) {
-//            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
-//        }  else { inputData.add("Unused predictor"); }
-//
-//        //check country
-//        if (countryCbx.isSelected() && countrys.getSelectedItem().toString().contains("Add a country")) {
-//            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
-//        }  else { inputData.add("Unused predictor"); }
+
+        //check language
+        if (languageCbx.isSelected()) {
+            if (languageCombo.getSelectionModel().isEmpty()) { errorMessages.add("Please add at least 1 language or uncheck this predictor"); }
+            else {
+                String languageString = "";
+                for (String language : languageCombo.getItems()) { languageString = languageString + "," + language; }
+                inputData.add(languageString);
+            }
+        }  else { inputData.add("Unused predictor"); }
+
+        //check country
+        if (countryCbx.isSelected()) {
+            if (countryCombo.getSelectionModel().isEmpty()) { errorMessages.add("Please add at least 1 country or uncheck this predictor"); }
+            else {
+                String countryString = "";
+                for (String country : countryCombo.getItems()) { countryString = countryString + "," + country; }
+                inputData.add(countryString);
+            }
+        }  else { inputData.add("Unused predictor"); }
 
 
         //display error messages if there are errors
