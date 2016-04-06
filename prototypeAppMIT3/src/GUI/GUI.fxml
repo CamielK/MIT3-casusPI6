@@ -69,12 +69,10 @@
         <TextField fx:id="budgetInput" GridPane.columnIndex="2" GridPane.rowIndex="8" prefWidth="150" minWidth="150" maxWidth="150"/>
 
 
-
-
         <!--movie genre-->
         <CheckBox fx:id="genreCbx" onAction="#genreCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="9" selected="true"/>
         <Label fx:id="genreLbl" text="Genres: " GridPane.columnIndex="1" GridPane.rowIndex="9" />
-        <ComboBox fx:id="genreCombo" GridPane.columnIndex="2" GridPane.rowIndex="9" prefWidth="250.0">
+        <ComboBox fx:id="genreCombo" GridPane.columnIndex="2" GridPane.rowIndex="9" prefWidth="230.0">
             <items>
                 <FXCollections fx:id="genreList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -86,43 +84,52 @@
         </HBox>
 
 
-
-
-
         <!--movie director-->
         <CheckBox fx:id="directorCbx" onAction="#directorCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="10" selected="true"/>
         <Label fx:id="directorLbl" text="Directors: " GridPane.columnIndex="1" GridPane.rowIndex="10" />
-        <ListView fx:id="directorView" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-        <VBox fx:id="directorBox" alignment="CENTER_LEFT" spacing="0" GridPane.columnIndex="3" GridPane.rowIndex="10">
-            <Button onAction="#addDirector" text="Add director" />
-            <Separator />
-            <Button onAction="#removeDirector" text="    Remove   " />
-        </VBox>
+        <ComboBox fx:id="directorCombo" GridPane.columnIndex="2" GridPane.rowIndex="10" prefWidth="230.0">
+            <items>
+                <FXCollections fx:id="directorList" fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <HBox fx:id="directorBox" alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="10" >
+            <Button onAction="#addDirector" text="Add" />
+            <Button onAction="#removeDirector" text="Remove" />
+        </HBox>
 
         <!--movie writer-->
         <CheckBox fx:id="writerCbx" onAction="#writerCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="11" selected="true"/>
         <Label fx:id="writerLbl" text="Writers: " GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <ListView fx:id="writerView" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-        <VBox fx:id="writerBox" alignment="CENTER_LEFT" spacing="0" GridPane.columnIndex="3" GridPane.rowIndex="11">
-            <Button onAction="#addWriter" text="  Add writer  " />
-            <Separator />
-            <Button onAction="#removeWriter" text="    Remove    " />
-        </VBox>
+        <ComboBox fx:id="writerCombo" GridPane.columnIndex="2" GridPane.rowIndex="11" prefWidth="230.0">
+            <items>
+                <FXCollections fx:id="writerList" fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <HBox fx:id="writerBox" alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="11" >
+            <Button onAction="#addWriter" text="Add" />
+            <Button onAction="#removeWriter" text="Remove" />
+        </HBox>
 
         <!--movie cast-->
         <CheckBox fx:id="castCbx" onAction="#castCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="12" selected="true"/>
         <Label fx:id="castLbl" text="Cast: " GridPane.columnIndex="1" GridPane.rowIndex="12" />
-        <ListView fx:id="castView" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-        <VBox fx:id="castBox" alignment="CENTER_LEFT" spacing="0" GridPane.columnIndex="3" GridPane.rowIndex="12">
-            <Button onAction="#addCast" text="   Add cast   " />
-            <Separator />
-            <Button onAction="#removeCast" text="    Remove   " />
-        </VBox>
+        <ComboBox fx:id="castCombo" GridPane.columnIndex="2" GridPane.rowIndex="12" prefWidth="230.0">
+            <items>
+                <FXCollections fx:id="castList" fx:factory="observableArrayList">
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <HBox fx:id="castBox" alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="12" >
+            <Button onAction="#addCast" text="Add" />
+            <Button onAction="#removeCast" text="Remove" />
+        </HBox>
 
         <!--movie language-->
         <CheckBox fx:id="languageCbx" onAction="#languageCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="13" selected="true"/>
         <Label fx:id="languageLbl" text="Language: " GridPane.columnIndex="1" GridPane.rowIndex="13" />
-        <ComboBox fx:id="languageCombo" GridPane.columnIndex="2" GridPane.rowIndex="13" prefWidth="250.0">
+        <ComboBox fx:id="languageCombo" GridPane.columnIndex="2" GridPane.rowIndex="13" prefWidth="230.0">
             <items>
                 <FXCollections fx:id="languageList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -137,7 +144,7 @@
         <!--movie country-->
         <CheckBox fx:id="countryCbx" onAction="#countryCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="14" selected="true"/>
         <Label fx:id="countryLbl" text="Countrys: " GridPane.columnIndex="1" GridPane.rowIndex="14" />
-        <ComboBox fx:id="countryCombo" GridPane.columnIndex="2" GridPane.rowIndex="14" prefWidth="250.0">
+        <ComboBox fx:id="countryCombo" GridPane.columnIndex="2" GridPane.rowIndex="14" prefWidth="230.0">
             <items>
                 <FXCollections fx:id="countryList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -149,7 +156,7 @@
         </HBox>
 
         <!--predict button-->
-        <HBox alignment="CENTER" spacing="0" GridPane.columnIndex="2" GridPane.rowIndex="15">
+        <HBox alignment="CENTER" spacing="0" GridPane.columnIndex="2" GridPane.rowIndex="16">
             <Button onAction="#submitForm" text="Predict movie ratings!"/>
         </HBox>
 

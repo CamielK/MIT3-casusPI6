@@ -1,8 +1,6 @@
 package GUI;
 
-import inputControllers.ContinentController;
-import inputControllers.GenreController;
-import inputControllers.RemoveDialog;
+import inputControllers.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -62,9 +60,9 @@ public class GUIcontroller implements Initializable {
     @FXML private ComboBox<String> mpaaInput;
     @FXML private TextField budgetInput;
     @FXML private ComboBox<String> genreCombo; @FXML private HBox genreBox;
-    @FXML private ListView<String> directorView; @FXML private VBox directorBox;
-    @FXML private ListView<String> writerView; @FXML private VBox writerBox;
-    @FXML private ListView<String> castView; @FXML private VBox castBox;
+    @FXML private ComboBox<String> directorCombo; @FXML private HBox directorBox;
+    @FXML private ComboBox<String> writerCombo; @FXML private HBox writerBox;
+    @FXML private ComboBox<String> castCombo; @FXML private HBox castBox;
     @FXML private ComboBox<String> languageCombo; @FXML private HBox languageBox;
     @FXML private ComboBox<String> countryCombo; @FXML private HBox countryBox;
 
@@ -72,6 +70,9 @@ public class GUIcontroller implements Initializable {
     private GenreController genreController = new GenreController();
     private RemoveDialog removeDialog = new RemoveDialog();
     private ContinentController continentController = new ContinentController();
+    private DirectorController directorController = new DirectorController();
+    private WriterController writerController = new WriterController();
+    private CastController castController = new CastController();
 
     // >>> output components <<<
     @FXML private ProgressBar progressBar;
@@ -109,16 +110,16 @@ public class GUIcontroller implements Initializable {
         else {genreLbl.setDisable(true); genreCombo.setDisable(true); genreBox.setDisable(true);}
     }
     @FXML protected void directorCbxAction() {
-        if (directorCbx.isSelected()) {directorLbl.setDisable(false); directorView.setDisable(false); directorBox.setDisable(false);}
-        else {directorLbl.setDisable(true); directorView.setDisable(true); directorBox.setDisable(true);}
+        if (directorCbx.isSelected()) {directorLbl.setDisable(false); directorCombo.setDisable(false); directorBox.setDisable(false);}
+        else {directorLbl.setDisable(true); directorCombo.setDisable(true); directorBox.setDisable(true);}
     }
     @FXML protected void writerCbxAction() {
-        if (writerCbx.isSelected()) {writerLbl.setDisable(false); writerView.setDisable(false); writerBox.setDisable(false);}
-        else {writerLbl.setDisable(true); writerView.setDisable(true); writerBox.setDisable(true);}
+        if (writerCbx.isSelected()) {writerLbl.setDisable(false); writerCombo.setDisable(false); writerBox.setDisable(false);}
+        else {writerLbl.setDisable(true); writerCombo.setDisable(true); writerBox.setDisable(true);}
     }
     @FXML protected void castCbxAction() {
-        if (castCbx.isSelected()) {castLbl.setDisable(false); castView.setDisable(false); castBox.setDisable(false);}
-        else {castLbl.setDisable(true); castView.setDisable(true); castBox.setDisable(true);}
+        if (castCbx.isSelected()) {castLbl.setDisable(false); castCombo.setDisable(false); castBox.setDisable(false);}
+        else {castLbl.setDisable(true); castCombo.setDisable(true); castBox.setDisable(true);}
     }
     @FXML protected void languageCbxAction() {
         if (languageCbx.isSelected()) {languageLbl.setDisable(false); languageCombo.setDisable(false); languageBox.setDisable(false);}
@@ -136,7 +137,8 @@ public class GUIcontroller implements Initializable {
         String addedGenre = genreController.addGenre(genreCombo);
         if (!addedGenre.equals("null") && addedGenre!=null) {
             genreCombo.getItems().add(addedGenre);
-            genreCombo.getSelectionModel().select(0);
+            genreCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.show();
         }
     }
     @FXML protected void removeGenre(ActionEvent event) {
@@ -146,28 +148,53 @@ public class GUIcontroller implements Initializable {
         }
     }
     @FXML protected void addDirector(ActionEvent event) {
-
+        String addedDirector = directorController.addDirector(directorCombo);
+        if (!addedDirector.equals("null") && addedDirector!=null) {
+            directorCombo.getItems().add(addedDirector);
+            directorCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.show();
+        }
     }
     @FXML protected void removeDirector(ActionEvent event) {
-
+        if (directorCombo.getItems().size()>0 && removeDialog.getRemoveDialog("director", (Stage) directorCombo.getScene().getWindow())) {
+            directorCombo.getItems().remove(directorCombo.getSelectionModel().getSelectedIndex());
+            directorCombo.getSelectionModel().select(0);
+        }
     }
     @FXML protected void addWriter(ActionEvent event) {
-
+        String addedWriter = writerController.addWriter(writerCombo);
+        if (!addedWriter.equals("null") && addedWriter!=null) {
+            writerCombo.getItems().add(addedWriter);
+            writerCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.show();
+        }
     }
     @FXML protected void removeWriter(ActionEvent event) {
-
+        if (writerCombo.getItems().size()>0 && removeDialog.getRemoveDialog("writer", (Stage) writerCombo.getScene().getWindow())) {
+            writerCombo.getItems().remove(writerCombo.getSelectionModel().getSelectedIndex());
+            writerCombo.getSelectionModel().select(0);
+        }
     }
     @FXML protected void addCast(ActionEvent event) {
-
+        String addedCast = castController.addCast(castCombo);
+        if (!addedCast.equals("null") && addedCast!=null) {
+            castCombo.getItems().add(addedCast);
+            castCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.show();
+        }
     }
     @FXML protected void removeCast(ActionEvent event) {
-
+        if (castCombo.getItems().size()>0 && removeDialog.getRemoveDialog("cast", (Stage) castCombo.getScene().getWindow())) {
+            castCombo.getItems().remove(castCombo.getSelectionModel().getSelectedIndex());
+            castCombo.getSelectionModel().select(0);
+        }
     }
     @FXML protected void addLanguage(ActionEvent event) {
         String addedLanguage = continentController.addContinent(languageCombo,"language");
         if (!addedLanguage.equals("null") && addedLanguage!=null) {
             languageCombo.getItems().add(addedLanguage);
-            languageCombo.getSelectionModel().select(0);
+            languageCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.show();
         }
     }
     @FXML protected void removeLanguage(ActionEvent event) {
@@ -180,7 +207,8 @@ public class GUIcontroller implements Initializable {
         String addedCountry = continentController.addContinent(countryCombo,"country");
         if (!addedCountry.equals("null") && addedCountry!=null) {
             countryCombo.getItems().add(addedCountry);
-            countryCombo.getSelectionModel().select(0);
+            countryCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.show();
         }
     }
     @FXML protected void removeCountry(ActionEvent event) {
@@ -348,10 +376,8 @@ public class GUIcontroller implements Initializable {
             //submit form
 
 
-//            ObservableList<String> items = FXCollections.observableArrayList("Aa","B","C","F","G");
-//            genreView.setItems(items);
-//
-//            setOutputComponentsVisible(true);
+
+            setOutputComponentsVisible(true);
         }
     }
 
