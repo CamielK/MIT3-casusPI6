@@ -1,39 +1,25 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class MainGUI extends Application {
+public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
 
-
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/GUI.fxml"));
 
-        Scene scene = new Scene(root, 1000, 700);
+        Scene scene = new Scene(root, 1000, 750);
 
         stage.setTitle("Movie predictor");
         stage.setScene(scene);
         stage.show();
     }
-
-
-
-
-
-
-
 
 
 
@@ -100,7 +86,7 @@ public class MainGUI extends Application {
 //        primaryStage.setScene(scene);
 //
 //        //add style sheet file to scene
-//        scene.getStylesheets().add(MainGUI.class.getResource("guiStyles.css").toExternalForm());
+//        scene.getStylesheets().add(Main.class.getResource("guiStyles.css").toExternalForm());
 //
 //        //finalize form
 //        primaryStage.show();

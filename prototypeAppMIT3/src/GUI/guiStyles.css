@@ -21,6 +21,10 @@
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
 
+.combo-box-popup .list-view .list-cell .text {
+    -fx-prompt-text-fill: #2A5058;
+}
+
 #intro-header {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
@@ -34,6 +38,12 @@
     -fx-font-family: "Arial Black";
     -fx-fill: #333333;
     /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+}
+
+#intro-msg {
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: green;
 }
 
 #seperator {

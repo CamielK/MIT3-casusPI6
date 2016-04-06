@@ -1,5 +1,8 @@
-import com.sun.org.apache.xml.internal.security.Init;
-import javafx.animation.FadeTransition;
+package GUI;
+
+import inputControllers.ContinentController;
+import inputControllers.GenreController;
+import inputControllers.RemoveDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,11 +12,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.*;
 import java.util.List;
@@ -53,28 +57,32 @@ public class GUIcontroller implements Initializable {
 
 
     // >>> input components <<<
-    @FXML private TextField titleInput;
     @FXML private TextField releaseInput;
     @FXML private TextField runtimeInput;
     @FXML private ComboBox<String> mpaaInput;
     @FXML private TextField budgetInput;
-    //genre
-    //director
-    //writer
-    //cast
-    //language
-    //country
+    @FXML private ComboBox<String> genreCombo; @FXML private HBox genreBox;
+    @FXML private ListView<String> directorView; @FXML private VBox directorBox;
+    @FXML private ListView<String> writerView; @FXML private VBox writerBox;
+    @FXML private ListView<String> castView; @FXML private VBox castBox;
+    @FXML private ComboBox<String> languageCombo; @FXML private HBox languageBox;
+    @FXML private ComboBox<String> countryCombo; @FXML private HBox countryBox;
 
+    // >>> input controllers <<<
+    private GenreController genreController = new GenreController();
+    private RemoveDialog removeDialog = new RemoveDialog();
+    private ContinentController continentController = new ContinentController();
 
     // >>> output components <<<
-    @FXML private Text errors;
     @FXML private ProgressBar progressBar;
 
 
+    // init method is run when fxml is finished loading
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         setOutputComponentsVisible(false);
     }
+
 
 
 
@@ -96,12 +104,97 @@ public class GUIcontroller implements Initializable {
         if (budgetCbx.isSelected()) {budgetLbl.setDisable(false); budgetInput.setDisable(false);}
         else {budgetLbl.setDisable(true); budgetInput.setDisable(true);}
     }
+    @FXML protected void genreCbxAction() {
+        if (genreCbx.isSelected()) {genreLbl.setDisable(false); genreCombo.setDisable(false); genreBox.setDisable(false);}
+        else {genreLbl.setDisable(true); genreCombo.setDisable(true); genreBox.setDisable(true);}
+    }
+    @FXML protected void directorCbxAction() {
+        if (directorCbx.isSelected()) {directorLbl.setDisable(false); directorView.setDisable(false); directorBox.setDisable(false);}
+        else {directorLbl.setDisable(true); directorView.setDisable(true); directorBox.setDisable(true);}
+    }
+    @FXML protected void writerCbxAction() {
+        if (writerCbx.isSelected()) {writerLbl.setDisable(false); writerView.setDisable(false); writerBox.setDisable(false);}
+        else {writerLbl.setDisable(true); writerView.setDisable(true); writerBox.setDisable(true);}
+    }
+    @FXML protected void castCbxAction() {
+        if (castCbx.isSelected()) {castLbl.setDisable(false); castView.setDisable(false); castBox.setDisable(false);}
+        else {castLbl.setDisable(true); castView.setDisable(true); castBox.setDisable(true);}
+    }
+    @FXML protected void languageCbxAction() {
+        if (languageCbx.isSelected()) {languageLbl.setDisable(false); languageCombo.setDisable(false); languageBox.setDisable(false);}
+        else {languageLbl.setDisable(true); languageCombo.setDisable(true); languageBox.setDisable(true);}
+    }
+    @FXML protected void countryCbxAction() {
+        if (countryCbx.isSelected()) {countryLbl.setDisable(false); countryCombo.setDisable(false); countryBox.setDisable(false);}
+        else {countryLbl.setDisable(true); countryCombo.setDisable(true); countryBox.setDisable(true);}
+    }
 
+
+
+    // >>> add and remove button handlers for combo boxes <<<
+    @FXML protected void addGenre(ActionEvent event) {
+        String addedGenre = genreController.addGenre(genreCombo);
+        if (!addedGenre.equals("null") && addedGenre!=null) {
+            genreCombo.getItems().add(addedGenre);
+            genreCombo.getSelectionModel().select(0);
+        }
+    }
+    @FXML protected void removeGenre(ActionEvent event) {
+        if (genreCombo.getItems().size()>0 && removeDialog.getRemoveDialog("genre", (Stage) genreCombo.getScene().getWindow())) {
+            genreCombo.getItems().remove(genreCombo.getSelectionModel().getSelectedIndex());
+            genreCombo.getSelectionModel().select(0);
+        }
+    }
+    @FXML protected void addDirector(ActionEvent event) {
+
+    }
+    @FXML protected void removeDirector(ActionEvent event) {
+
+    }
+    @FXML protected void addWriter(ActionEvent event) {
+
+    }
+    @FXML protected void removeWriter(ActionEvent event) {
+
+    }
+    @FXML protected void addCast(ActionEvent event) {
+
+    }
+    @FXML protected void removeCast(ActionEvent event) {
+
+    }
+    @FXML protected void addLanguage(ActionEvent event) {
+        String addedLanguage = continentController.addContinent(languageCombo,"language");
+        if (!addedLanguage.equals("null") && addedLanguage!=null) {
+            languageCombo.getItems().add(addedLanguage);
+            languageCombo.getSelectionModel().select(0);
+        }
+    }
+    @FXML protected void removeLanguage(ActionEvent event) {
+        if (languageCombo.getItems().size()>0 && removeDialog.getRemoveDialog("language", (Stage) languageCombo.getScene().getWindow())) {
+            languageCombo.getItems().remove(languageCombo.getSelectionModel().getSelectedIndex());
+            languageCombo.getSelectionModel().select(0);
+        }
+    }
+    @FXML protected void addCountry(ActionEvent event) {
+        String addedCountry = continentController.addContinent(countryCombo,"country");
+        if (!addedCountry.equals("null") && addedCountry!=null) {
+            countryCombo.getItems().add(addedCountry);
+            countryCombo.getSelectionModel().select(0);
+        }
+    }
+    @FXML protected void removeCountry(ActionEvent event) {
+        if (countryCombo.getItems().size()>0 && removeDialog.getRemoveDialog("country", (Stage) countryCombo.getScene().getWindow())) {
+            countryCombo.getItems().remove(countryCombo.getSelectionModel().getSelectedIndex());
+            countryCombo.getSelectionModel().select(0);
+        }
+    }
 
 
 
 
     // >>> submit button action <<<
+    //checks if there are no invalid form entries and starts the calculation if there are no errors.
     @FXML protected void submitForm(ActionEvent event) {
 
         //reset label colors due to previous submits
@@ -193,7 +286,7 @@ public class GUIcontroller implements Initializable {
 //        }  else { inputData.add("Unused predictor"); }
 
 
-        //submit form
+        //display error messages if there are errors
         if (errorMessages.size() > 0) {
 
 
@@ -244,7 +337,10 @@ public class GUIcontroller implements Initializable {
             //submit form
 
 
-            setOutputComponentsVisible(true);
+//            ObservableList<String> items = FXCollections.observableArrayList("Aa","B","C","F","G");
+//            genreView.setItems(items);
+//
+//            setOutputComponentsVisible(true);
         }
     }
 
