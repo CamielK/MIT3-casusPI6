@@ -8,7 +8,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Separator;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -25,67 +28,26 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-//this program uses the csvjdbc library to work directly with csv files. get JAR at: http://csvjdbc.sourceforge.net/
-import org.relique.jdbc.csv.CsvDriver;
-
 /**
  * Created by Camiel on 06-Apr-16.
  */
-public class DirectorController {
+public class Cast {
 
-    private static String addedDirector;
+    //variables
+    private static String addedCastMember;
     private static Stage parentStage;
-    private static boolean searching;
     private static ComboBox<String> searchBox;
     private static ProgressIndicator indicator;
     private static Text errorComponent;
 
-    //returns the combined average director rating for a movie based on all given directors individual average imdb ratings
-    public float getAvgDirectorRating(List<String> directors) {
-
-        //calculate each directors average rating
-        List<Float> avrgRatings = new ArrayList<Float>();
-        for (String director : directors) {
-            //get film ratings of every film featuring the director
-            try {
-                //establish static connection for all threads
-                Connection conn = DriverManager.getConnection("jdbc:relique:csv:" + "src/data");
-
-                //execute query
-                conn.setAutoCommit(false);
-                PreparedStatement stmt = conn.prepareStatement("SELECT imdbRating FROM ratingCalcDatabase WHERE Director LIKE '%"+director+"%'");
-                ResultSet ratings = stmt.executeQuery();
-
-                //calculate average
-                float total = 0, count = 0;
-                while (ratings.next()) {
-                    total += Float.parseFloat(ratings.getString("imdbRating"));
-                    count++;
-                }
-                float avrg = total / count;
-                avrgRatings.add(avrg);
-            }
-            catch(Exception e) {e.printStackTrace();}
-
-        }
-
-        //calculate average rating of all directors combined
-        float total = 0, count = 0;
-        for (float avrgRating : avrgRatings) {
-            total += avrgRating;
-            count++;
-        }
-
-        //return combined average rating
-        return (total/count);
-    }
-
-    public String addDirector(ComboBox<String> comboBox) {
+    //create a dialog for the user to select a new actor. returns the chosen actor
+    public String addCast(ComboBox<String> comboBox) {
         final ObservableList<String> selectionModel = comboBox.getItems();
         this.parentStage = (Stage) comboBox.getScene().getWindow();
 
+
         //explanation message
-        Text msg = new Text("Start typing to search the director you would like to add");
+        Text msg = new Text("Start typing to search the actor you would like to add to the cast");
 
         //error message
         errorComponent = new Text();
@@ -117,16 +79,14 @@ public class DirectorController {
             @Override
             public void handle(KeyEvent keyEvent) {
                 //System.out.println(searchBox.getEditor().getText());
-                if (searchBox.getEditor().getText().length()>3) { //start query when keys are pressed and search string is bigger then 3 chars
+                if (searchBox.getEditor().getText().length()>3 && keyEvent.getCode() != KeyCode.DOWN && keyEvent.getCode() != KeyCode.UP && keyEvent.getCode() != KeyCode.LEFT && keyEvent.getCode() != KeyCode.RIGHT) { //start query when keys are pressed and search string is bigger then 3 chars
                     //errorComponent.setText("");
                     indicator.setProgress(-1.0);
                     indicator.setVisible(true); //display search indicator
-                    DirectorController.searching = true;
                     //searchBox.setDisable(true); //disable while searching
                     searchBox.getItems().clear(); //clear combo box
                     String searchString = searchBox.getEditor().getText();
-                    new DirectorQuery(searchString).start();
-                    //findDirector(searchBox.getEditor().getText()); //start query
+                    new CastQuery(searchString).start();
 
                 }
             }
@@ -140,27 +100,27 @@ public class DirectorController {
         sep.setVisible(false);
 
         //add button
-        final Button add = new Button("Add director");
+        final Button add = new Button("Add actor");
         add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
 
                 if (searchBox.getSelectionModel().isEmpty()) {
-                    errorComponent.setText("Please select a director or cancel..");
+                    errorComponent.setText("Please select an actor or cancel..");
                 }
                 else {
-                    boolean directorAlreadyAdded = false;
+                    boolean castAlreadyAdded = false;
                     for (String item : selectionModel) {
                         if (item.equals(searchBox.getSelectionModel().getSelectedItem())) {
-                            directorAlreadyAdded = true;
+                            castAlreadyAdded = true;
                         }
                     }
-                    if (directorAlreadyAdded) {
-                        errorComponent.setText("Director is already added..");
+                    if (castAlreadyAdded) {
+                        errorComponent.setText("Actor is already added..");
                     }
                     else {
-                        DirectorController.addedDirector = searchBox.getSelectionModel().getSelectedItem();
+                        Cast.addedCastMember = searchBox.getSelectionModel().getSelectedItem();
                         Stage stage = (Stage) add.getScene().getWindow();
                         stage.close();
                     }
@@ -178,7 +138,7 @@ public class DirectorController {
         cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                DirectorController.addedDirector = "null";
+                Cast.addedCastMember = "null";
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
             }
@@ -199,16 +159,19 @@ public class DirectorController {
                 alignment(Pos.CENTER).padding(new Insets(50)).build()));
         dialogStage.showAndWait();
 
-        return addedDirector;
+
+        return addedCastMember;
     }
 
 
-    //this sub class does a query in a new thread to find any directors that contain the search string.
-    public class DirectorQuery extends Thread {
+
+
+    //this sub class does a query in a new thread to find any cast members that contain the search string.
+    public class CastQuery extends Thread {
 
         private String searchString;
 
-        public DirectorQuery (String searchString) {
+        public CastQuery(String searchString) {
             this.searchString = searchString.toLowerCase();
         }
 
@@ -222,38 +185,40 @@ public class DirectorController {
 
                 //do the query
                 conn.setAutoCommit(false);
-                PreparedStatement stmt = conn.prepareStatement("SELECT Director FROM ratingCalcDatabase");
-                ResultSet directorFields = stmt.executeQuery();
+                PreparedStatement stmt = conn.prepareStatement("SELECT Cast FROM ratingCalcDatabase");
+                ResultSet castFields = stmt.executeQuery();
 
                 //check results
-                while(directorFields.next()) {
+                while(castFields.next()) {
                     //get next field
-                    String directorField = directorFields.getString("Director");
+                    String castField = castFields.getString("Cast");
 
-                    if (directorField.toLowerCase().contains(searchString)) {
-                        //split multiple directors
-                        List<String> directors = new ArrayList<String>();
-                        directorField = directorField.replaceAll("'", "''");
-                        while (directorField.contains(",")) {
+                    if (castField.toLowerCase().contains(searchString)) {
+                        //split multiple cast
+                        List<String> castMembers = new ArrayList<String>();
+                        castField = castField.replaceAll("'", "''");
+                        while (castField.contains(",")) {
+
                             //get last name in field
-                            int lastDirectorIndex = directorField.lastIndexOf(',');
-                            String director = directorField.substring(lastDirectorIndex+2);
-                            directorField = directorField.substring(0,lastDirectorIndex);
+                            int lastCastIndex = castField.lastIndexOf(',');
+                            String castMember = castField.substring(lastCastIndex+2);
 
-                            directors.add(director);
+                            castField = castField.substring(0,lastCastIndex);
+
+                            castMembers.add(castMember);
                         }
-                        directors.add(directorField);
+                        castMembers.add(castField);
 
-                        for (String director : directors) {
-                            if (director.toLowerCase().contains(searchString)) {
+                        for (String castMember : castMembers) {
+                            if (castMember.toLowerCase().contains(searchString)) {
                                 boolean alreadyAdded = false;
                                 for (String result : queryResults) {
-                                    if (result.equals(director)) {
+                                    if (result.equals(castMember)) {
                                         alreadyAdded = true;
                                     }
                                 }
                                 if (!alreadyAdded) {
-                                    queryResults.add(director);
+                                    queryResults.add(castMember);
                                 }
                             }
                         }
@@ -270,14 +235,13 @@ public class DirectorController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                searching = false;
                 indicator.setVisible(false);
                 searchBox.setDisable(false);
                 if (queryResults.size() > 0) {
                     searchBox.setItems(queryResults);
                     searchBox.show();
                 } else {
-                    errorComponent.setText("No directors found for: '" + searchString + "'. Please try again");
+                    errorComponent.setText("No actors found for: '" + searchString + "'. Please try again");
                 }
             }
         });

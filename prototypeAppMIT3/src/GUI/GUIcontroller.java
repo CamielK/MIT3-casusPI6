@@ -1,5 +1,8 @@
 package GUI;
 
+import calculators.AverageRating;
+import calculators.RatingPredictor;
+import calculators.RevenuePredictor;
 import inputControllers.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -67,12 +69,15 @@ public class GUIcontroller implements Initializable {
     @FXML private ComboBox<String> countryCombo; @FXML private HBox countryBox;
 
     // >>> input controllers <<<
-    private GenreController genreController = new GenreController();
+    private Genre genreController = new Genre();
     private RemoveDialog removeDialog = new RemoveDialog();
-    private ContinentController continentController = new ContinentController();
-    private DirectorController directorController = new DirectorController();
-    private WriterController writerController = new WriterController();
-    private CastController castController = new CastController();
+    private Continent continentController = new Continent();
+    private Director directorController = new Director();
+    private Writer writerController = new Writer();
+    private Cast castController = new Cast();
+    private AverageRating avgRatingCalculator = new AverageRating();
+    private RatingPredictor ratingCalculator = new RatingPredictor();
+    private RevenuePredictor revenuePredictor = new RevenuePredictor();
 
     // >>> output components <<<
     @FXML private ProgressBar progress;
@@ -365,7 +370,7 @@ public class GUIcontroller implements Initializable {
 
 
             //create error text and add it to a new text component. set style to look like error message
-            String errorText = "";
+            String errorText = "Please fix the following errors before submitting the form: \n";
             for (String error : errorMessages) {
                 errorText += "- " + error + "\n"; //add each error message to a new line of the final text component
 
@@ -412,15 +417,15 @@ public class GUIcontroller implements Initializable {
             //call calculators to get output values
             progressStatus.setText("Calculating average director rating..");
             progress.setProgress(0.1);
-            float avgDirectorRating = directorController.getAvgDirectorRating(directorCombo.getItems());
+            float avgDirectorRating = avgRatingCalculator.getAvgRating(directorCombo.getItems(), "director");
 
             progressStatus.setText("Calculating average writer rating..");
             progress.setProgress(0.2);
-//            float avgWriterRating = writerController.getAvgWriterRating(writerCombo.getItems());
+            float avgWriterRating = avgRatingCalculator.getAvgRating(writerCombo.getItems(), "writer");
 
             progressStatus.setText("Calculating average cast rating..");
             progress.setProgress(0.3);
-//            float avgCastRating = castController.getAvgCastRating(castCombo.getItems());
+            float avgCastRating = avgRatingCalculator.getAvgRating(castCombo.getItems(), "cast");
 
             //call multiple linear regression method to get predicted imdb rating
             progressStatus.setText("Executing multiple linear regression for imdb rating");
@@ -437,10 +442,10 @@ public class GUIcontroller implements Initializable {
             progressStatus.setText("Done.");
             progress.setProgress(1.0);
             avgDirectorOutput.setText(String.format("%.1f", (avgDirectorRating)));
-//            avgWriterOutput.setText(String.format("%.1f", (avgWriterRating)));
-//            avgCastOutput.setText(String.format("%.1f", (avgCastRating)));
-//            ratingOutput.setText(String.format("%.1f", (avgCastRating)));
-//            revenueOutput.setText(String.format("%.1f", (avgCastRating)));
+            avgWriterOutput.setText(String.format("%.1f", (avgWriterRating)));
+            avgCastOutput.setText(String.format("%.1f", (avgCastRating)));
+//            ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
+//            revenueOutput.setText(String.format("%.1f", (predictedRevenue)));
             setOutputComponentsVisible(true);
 
         }

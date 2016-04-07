@@ -1,16 +1,13 @@
 package inputControllers;
 
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBoxBuilder;
@@ -22,7 +19,7 @@ import javafx.stage.StageStyle;
 /**
  * Created by Camiel on 06-Apr-16.
  */
-public class GenreController {
+public class Genre {
 
     private static String addedGenre;
     private static Stage parentStage;
@@ -90,7 +87,7 @@ public class GenreController {
                         errorComponent.setText("Genre is already added..");
                     }
                     else {
-                        GenreController.addedGenre = genreBox.getSelectionModel().getSelectedItem();
+                        Genre.addedGenre = genreBox.getSelectionModel().getSelectedItem();
                         Stage stage = (Stage) add.getScene().getWindow();
                         stage.close();
                     }
@@ -108,7 +105,7 @@ public class GenreController {
         cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                GenreController.addedGenre = "null";
+                Genre.addedGenre = "null";
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
             }

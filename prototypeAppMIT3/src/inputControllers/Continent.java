@@ -19,7 +19,7 @@ import javafx.stage.StageStyle;
 /**
  * Created by Camiel on 06-Apr-16.
  */
-public class ContinentController {
+public class Continent {
 
     private static String addedContinent;
     private static Stage parentStage;
@@ -71,7 +71,7 @@ public class ContinentController {
                         errorComponent.setText(theme+" is already added..");
                     }
                     else {
-                        ContinentController.addedContinent = selectBox.getSelectionModel().getSelectedItem();
+                        Continent.addedContinent = selectBox.getSelectionModel().getSelectedItem();
                         Stage stage = (Stage) add.getScene().getWindow();
                         stage.close();
                     }
@@ -89,7 +89,7 @@ public class ContinentController {
         cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ContinentController.addedContinent = "null";
+                Continent.addedContinent = "null";
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
             }

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBoxBuilder;
@@ -30,15 +31,17 @@ import java.util.List;
 /**
  * Created by Camiel on 06-Apr-16.
  */
-public class WriterController {
+public class Writer {
 
+    //variables
     private static String addedWriter;
     private static Stage parentStage;
-    private static boolean searching;
     private static ComboBox<String> searchBox;
     private static ProgressIndicator indicator;
     private static Text errorComponent;
 
+
+    //create a dialog for the user to select a new writer. returns the chosen writer
     public String addWriter(ComboBox<String> comboBox) {
         final ObservableList<String> selectionModel = comboBox.getItems();
         this.parentStage = (Stage) comboBox.getScene().getWindow();
@@ -77,11 +80,10 @@ public class WriterController {
             @Override
             public void handle(KeyEvent keyEvent) {
                 //System.out.println(searchBox.getEditor().getText());
-                if (searchBox.getEditor().getText().length()>3) { //start query when keys are pressed and search string is bigger then 3 chars
+                if (searchBox.getEditor().getText().length()>3 && keyEvent.getCode() != KeyCode.DOWN && keyEvent.getCode() != KeyCode.UP && keyEvent.getCode() != KeyCode.LEFT && keyEvent.getCode() != KeyCode.RIGHT) { //start query when keys are pressed and search string is bigger then 3 chars
                     //errorComponent.setText("");
                     indicator.setProgress(-1.0);
                     indicator.setVisible(true); //display search indicator
-                    WriterController.searching = true;
                     //searchBox.setDisable(true); //disable while searching
                     searchBox.getItems().clear(); //clear combo box
                     String searchString = searchBox.getEditor().getText();
@@ -119,7 +121,7 @@ public class WriterController {
                         errorComponent.setText("Writer is already added..");
                     }
                     else {
-                        WriterController.addedWriter = searchBox.getSelectionModel().getSelectedItem();
+                        Writer.addedWriter = searchBox.getSelectionModel().getSelectedItem();
                         Stage stage = (Stage) add.getScene().getWindow();
                         stage.close();
                     }
@@ -137,7 +139,7 @@ public class WriterController {
         cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                WriterController.addedWriter = "null";
+                Writer.addedWriter = "null";
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
             }
@@ -238,7 +240,6 @@ public class WriterController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                searching = false;
                 indicator.setVisible(false);
                 searchBox.setDisable(false);
                 if (queryResults.size() > 0) {

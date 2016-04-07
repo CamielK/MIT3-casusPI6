@@ -27,6 +27,7 @@
 
         <!--intro text-->
         <Text id="intro-header" text="Movie rating and revenue predictor" GridPane.columnIndex="0" GridPane.columnSpan="8" GridPane.rowIndex="0" />
+        <Text id="intro-text" text="${'MIT3 prototype applicatie. Door:\nMaikel Geuns, Aydin Erdas,\nCas Hewlig, Camiel Kerkhofs.'}"  GridPane.columnIndex="6" GridPane.rowIndex="0" GridPane.columnSpan="8" />
         <!--<Text id="intro-text" text="${'Please enter movie info to predict its rating and revenue.\nUse the checkboxes to enable/disable certain predictor variables.\nDisabled predictors will not be used in the calculation.'}" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="8" />-->
         <Separator id="seperator" orientation="HORIZONTAL" prefWidth="700" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="10"/>
         <!--<Separator id="seperator" orientation="VERTICAL" valignment="CENTER" prefHeight="500" prefWidth="100" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.rowSpan="20" visible="false"/>-->
