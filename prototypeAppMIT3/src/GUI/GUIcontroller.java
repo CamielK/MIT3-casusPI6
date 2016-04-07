@@ -67,6 +67,8 @@ public class GUIcontroller implements Initializable {
     @FXML private ComboBox<String> castCombo; @FXML private HBox castBox;
     @FXML private ComboBox<String> languageCombo; @FXML private HBox languageBox;
     @FXML private ComboBox<String> countryCombo; @FXML private HBox countryBox;
+    @FXML private Button submitBtn;
+    @FXML private Button helpBtn;
 
     // >>> input controllers <<<
     private Genre genreController = new Genre();
@@ -230,6 +232,12 @@ public class GUIcontroller implements Initializable {
     }
 
 
+    // >>> help button <<<
+    //show help dialog with information about prototype app
+    @FXML protected void help(ActionEvent event) {
+        new HelpDialog((Stage) helpBtn.getScene().getWindow());
+    }
+
 
 
     // >>> submit button action <<<
@@ -364,16 +372,12 @@ public class GUIcontroller implements Initializable {
             errorMessages.add("You must select at least 4 predictor variables to continue..");
         }
 
-
         //display error messages if there are errors
         if (errorMessages.size() > 0) {
-
-
             //create error text and add it to a new text component. set style to look like error message
             String errorText = "Please fix the following errors before submitting the form: \n";
             for (String error : errorMessages) {
                 errorText += "- " + error + "\n"; //add each error message to a new line of the final text component
-
 
                 //change style of labels to show incorrect variables
                 if (error.contains("release")) { releaseLbl.setStyle("-fx-text-fill: FIREBRICK;"); }
@@ -386,20 +390,16 @@ public class GUIcontroller implements Initializable {
                 if (error.contains("cast")) { castLbl.setStyle("-fx-text-fill: FIREBRICK;"); }
                 if (error.contains("language")) { languageLbl.setStyle("-fx-text-fill: FIREBRICK;"); }
                 if (error.contains("country")) { countryLbl.setStyle("-fx-text-fill: FIREBRICK;"); }
-
-
-
-
             }
             Text errorComponent = new Text(errorText);
             errorComponent.setStyle("-fx-fill: FIREBRICK; -fx-font-weight: bold; -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );");
 
             //button to close dialog
-            final Button test = new Button("Okay, got it");
-            test.setOnAction(new EventHandler<ActionEvent>() {
+            final Button okay = new Button("Okay, got it");
+            okay.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    Stage stage = (Stage) test.getScene().getWindow();
+                    Stage stage = (Stage) okay.getScene().getWindow();
                     stage.close();
                 }
             });
@@ -407,10 +407,11 @@ public class GUIcontroller implements Initializable {
             //create and show new dialog with error messages
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner((Stage) submitBtn.getScene().getWindow()); //set focus on dialog
             dialogStage.setScene(new Scene(VBoxBuilder.create().
-                    children(errorComponent, test).
+                    children(errorComponent, okay).
                     alignment(Pos.CENTER).padding(new Insets(5)).build()));
-            dialogStage.show();
+            dialogStage.showAndWait();
         }
         else {
 
@@ -452,10 +453,10 @@ public class GUIcontroller implements Initializable {
     }
 
 
-
+    //hides or shows the output components
     public void setOutputComponentsVisible(boolean outputVisible) {
         int componentsCount = grid.getChildren().size();
-        for (int i = componentsCount-10; i < componentsCount; i++) {
+        for (int i = componentsCount-11; i < componentsCount-1; i++) {
             grid.getChildren().get(i).setVisible(outputVisible);
         }
 
