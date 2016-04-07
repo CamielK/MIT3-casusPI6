@@ -45,7 +45,7 @@ public class WriterController {
 
 
         //explanation message
-        Text msg = new Text("Search the writer you would like to add");
+        Text msg = new Text("Start typing to search the writer you would like to add");
 
         //error message
         errorComponent = new Text();

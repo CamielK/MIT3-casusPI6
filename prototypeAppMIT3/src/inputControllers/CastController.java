@@ -45,7 +45,7 @@ public class CastController {
 
 
         //explanation message
-        Text msg = new Text("Search the actor you would like to add to the cast");
+        Text msg = new Text("Start typing to search the actor you would like to add to the cast");
 
         //error message
         errorComponent = new Text();

@@ -40,12 +40,52 @@ public class DirectorController {
     private static ProgressIndicator indicator;
     private static Text errorComponent;
 
+    //returns the combined average director rating for a movie based on all given directors individual average imdb ratings
+    public float getAvgDirectorRating(List<String> directors) {
+
+        //calculate each directors average rating
+        List<Float> avrgRatings = new ArrayList<Float>();
+        for (String director : directors) {
+            //get film ratings of every film featuring the director
+            try {
+                //establish static connection for all threads
+                Connection conn = DriverManager.getConnection("jdbc:relique:csv:" + "src/data");
+
+                //execute query
+                conn.setAutoCommit(false);
+                PreparedStatement stmt = conn.prepareStatement("SELECT imdbRating FROM ratingCalcDatabase WHERE Director LIKE '%"+director+"%'");
+                ResultSet ratings = stmt.executeQuery();
+
+                //calculate average
+                float total = 0, count = 0;
+                while (ratings.next()) {
+                    total += Float.parseFloat(ratings.getString("imdbRating"));
+                    count++;
+                }
+                float avrg = total / count;
+                avrgRatings.add(avrg);
+            }
+            catch(Exception e) {e.printStackTrace();}
+
+        }
+
+        //calculate average rating of all directors combined
+        float total = 0, count = 0;
+        for (float avrgRating : avrgRatings) {
+            total += avrgRating;
+            count++;
+        }
+
+        //return combined average rating
+        return (total/count);
+    }
+
     public String addDirector(ComboBox<String> comboBox) {
         final ObservableList<String> selectionModel = comboBox.getItems();
         this.parentStage = (Stage) comboBox.getScene().getWindow();
 
         //explanation message
-        Text msg = new Text("Search the director you would like to add");
+        Text msg = new Text("Start typing to search the director you would like to add");
 
         //error message
         errorComponent = new Text();

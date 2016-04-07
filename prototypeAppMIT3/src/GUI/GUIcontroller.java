@@ -75,7 +75,13 @@ public class GUIcontroller implements Initializable {
     private CastController castController = new CastController();
 
     // >>> output components <<<
-    @FXML private ProgressBar progressBar;
+    @FXML private ProgressBar progress;
+    @FXML private Label progressStatus;
+    @FXML private Label avgDirectorOutput;
+    @FXML private Label avgWriterOutput;
+    @FXML private Label avgCastOutput;
+    @FXML private Label ratingOutput;
+    @FXML private Label revenueOutput;
 
 
     // init method is run when fxml is finished loading
@@ -137,8 +143,8 @@ public class GUIcontroller implements Initializable {
         String addedGenre = genreController.addGenre(genreCombo);
         if (!addedGenre.equals("null") && addedGenre!=null) {
             genreCombo.getItems().add(addedGenre);
-            genreCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
-            directorCombo.show();
+            genreCombo.getSelectionModel().select(0);
+            genreCombo.show();
         }
     }
     @FXML protected void removeGenre(ActionEvent event) {
@@ -151,7 +157,7 @@ public class GUIcontroller implements Initializable {
         String addedDirector = directorController.addDirector(directorCombo);
         if (!addedDirector.equals("null") && addedDirector!=null) {
             directorCombo.getItems().add(addedDirector);
-            directorCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
+            directorCombo.getSelectionModel().select(0);
             directorCombo.show();
         }
     }
@@ -165,8 +171,8 @@ public class GUIcontroller implements Initializable {
         String addedWriter = writerController.addWriter(writerCombo);
         if (!addedWriter.equals("null") && addedWriter!=null) {
             writerCombo.getItems().add(addedWriter);
-            writerCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
-            directorCombo.show();
+            writerCombo.getSelectionModel().select(0);
+            writerCombo.show();
         }
     }
     @FXML protected void removeWriter(ActionEvent event) {
@@ -179,8 +185,8 @@ public class GUIcontroller implements Initializable {
         String addedCast = castController.addCast(castCombo);
         if (!addedCast.equals("null") && addedCast!=null) {
             castCombo.getItems().add(addedCast);
-            castCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
-            directorCombo.show();
+            castCombo.getSelectionModel().select(0);
+            castCombo.show();
         }
     }
     @FXML protected void removeCast(ActionEvent event) {
@@ -193,8 +199,8 @@ public class GUIcontroller implements Initializable {
         String addedLanguage = continentController.addContinent(languageCombo,"language");
         if (!addedLanguage.equals("null") && addedLanguage!=null) {
             languageCombo.getItems().add(addedLanguage);
-            languageCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
-            directorCombo.show();
+            languageCombo.getSelectionModel().select(0);
+            languageCombo.show();
         }
     }
     @FXML protected void removeLanguage(ActionEvent event) {
@@ -207,8 +213,8 @@ public class GUIcontroller implements Initializable {
         String addedCountry = continentController.addContinent(countryCombo,"country");
         if (!addedCountry.equals("null") && addedCountry!=null) {
             countryCombo.getItems().add(addedCountry);
-            countryCombo.getSelectionModel().select(directorCombo.getItems().size()-1);
-            directorCombo.show();
+            countryCombo.getSelectionModel().select(0);
+            countryCombo.show();
         }
     }
     @FXML protected void removeCountry(ActionEvent event) {
@@ -226,6 +232,9 @@ public class GUIcontroller implements Initializable {
     @FXML protected void submitForm(ActionEvent event) {
 
         //reset label colors due to previous submits
+        setOutputComponentsVisible(false);
+        progress.setProgress(0.0);
+        progressStatus.setText("Awaiting input...");
         releaseLbl.setStyle("-fx-text-fill: #333333;");
         runtimeLbl.setStyle("-fx-text-fill: #333333;");
         mpaaLbl.setStyle("-fx-text-fill: #333333;");
@@ -289,20 +298,35 @@ public class GUIcontroller implements Initializable {
             }
         }  else { inputData.add("Unused predictor"); }
 
-//        //check director
-//        if (directorCbx.isSelected() && directors.getSelectedItem().toString().contains("Add a genre")) {
-//            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
-//        }  else { inputData.add("Unused predictor"); }
-//
-//        //check writer
-//        if (writerCbx.isSelected() && writers.getSelectedItem().toString().contains("Add a genre")) {
-//            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
-//        }  else { inputData.add("Unused predictor"); }
-//
-//        //check cast
-//        if (castCbx.isSelected() && cast.getSelectedItem().toString().contains("Add a genre")) {
-//            errorMessages.add("Please add at least 1 genre or uncheck this predictor");
-//        }  else { inputData.add("Unused predictor"); }
+        //check director
+        if (directorCbx.isSelected()) {
+            if (directorCombo.getSelectionModel().isEmpty()) { errorMessages.add("Please add at least 1 director or uncheck this predictor"); }
+            else {
+                String directorString = "";
+                for (String director : directorCombo.getItems()) { directorString = directorString + "," + director; }
+                inputData.add(directorString);
+            }
+        }  else { inputData.add("Unused predictor"); }
+
+        //check writer
+        if (writerCbx.isSelected()) {
+            if (writerCombo.getSelectionModel().isEmpty()) { errorMessages.add("Please add at least 1 writer or uncheck this predictor"); }
+            else {
+                String writerString = "";
+                for (String writer : writerCombo.getItems()) { writerString = writerString + "," + writer; }
+                inputData.add(writerString);
+            }
+        }  else { inputData.add("Unused predictor"); }
+
+        //check cast
+        if (castCbx.isSelected()) {
+            if (castCombo.getSelectionModel().isEmpty()) { errorMessages.add("Please add at least 1 actor to the cast or uncheck this predictor"); }
+            else {
+                String castString = "";
+                for (String actor : castCombo.getItems()) { castString = castString + "," + actor; }
+                inputData.add(castString);
+            }
+        }  else { inputData.add("Unused predictor"); }
 
         //check language
         if (languageCbx.isSelected()) {
@@ -323,6 +347,17 @@ public class GUIcontroller implements Initializable {
                 inputData.add(countryString);
             }
         }  else { inputData.add("Unused predictor"); }
+
+
+
+        //check if there are enough predictors
+        int unusedPredictors = 0;
+        for (String input : inputData) {
+            if (input.equals("Unused predictor")) { unusedPredictors++; }
+        }
+        if (unusedPredictors > 6) {
+            errorMessages.add("You must select at least 4 predictor variables to continue..");
+        }
 
 
         //display error messages if there are errors
@@ -373,11 +408,41 @@ public class GUIcontroller implements Initializable {
             dialogStage.show();
         }
         else {
-            //submit form
+
+            //call calculators to get output values
+            progressStatus.setText("Calculating average director rating..");
+            progress.setProgress(0.1);
+            float avgDirectorRating = directorController.getAvgDirectorRating(directorCombo.getItems());
+
+            progressStatus.setText("Calculating average writer rating..");
+            progress.setProgress(0.2);
+//            float avgWriterRating = writerController.getAvgWriterRating(writerCombo.getItems());
+
+            progressStatus.setText("Calculating average cast rating..");
+            progress.setProgress(0.3);
+//            float avgCastRating = castController.getAvgCastRating(castCombo.getItems());
+
+            //call multiple linear regression method to get predicted imdb rating
+            progressStatus.setText("Executing multiple linear regression for imdb rating");
+            progress.setProgress(0.5);
+//            float predictedImdbRating = ratingPredictor.getPredictedRating(MLRData);
+
+            //call multiple linear regression method to get predicted revenue
+            progressStatus.setText("Executing multiple linear regression for revenue");
+            progress.setProgress(0.75);
+//            float predictedRevenue = revenuePredictor.getPredictedRevenue(MLRData);
 
 
-
+            //show output
+            progressStatus.setText("Done.");
+            progress.setProgress(1.0);
+            avgDirectorOutput.setText(String.format("%.1f", (avgDirectorRating)));
+//            avgWriterOutput.setText(String.format("%.1f", (avgWriterRating)));
+//            avgCastOutput.setText(String.format("%.1f", (avgCastRating)));
+//            ratingOutput.setText(String.format("%.1f", (avgCastRating)));
+//            revenueOutput.setText(String.format("%.1f", (avgCastRating)));
             setOutputComponentsVisible(true);
+
         }
     }
 

@@ -34,7 +34,7 @@
 
         <!--    left input components      -->
         <Text id="intro-text" text="Enter movie info here:" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="3" />
-        <Text id="intro-msg" text="Use checkboxes to select/deselect predictors" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="4" />
+        <Text id="intro-msg" text="${'Use checkboxes to select/deselect predictors.\nSelect at least 4 predictors'}" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="4" />
 
 
         <!--movie release year-->
@@ -72,7 +72,7 @@
         <!--movie genre-->
         <CheckBox fx:id="genreCbx" onAction="#genreCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="9" selected="true"/>
         <Label fx:id="genreLbl" text="Genres: " GridPane.columnIndex="1" GridPane.rowIndex="9" />
-        <ComboBox fx:id="genreCombo" GridPane.columnIndex="2" GridPane.rowIndex="9" prefWidth="230.0">
+        <ComboBox fx:id="genreCombo" GridPane.columnIndex="2" GridPane.rowIndex="9" prefWidth="200.0">
             <items>
                 <FXCollections fx:id="genreList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -87,7 +87,7 @@
         <!--movie director-->
         <CheckBox fx:id="directorCbx" onAction="#directorCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="10" selected="true"/>
         <Label fx:id="directorLbl" text="Directors: " GridPane.columnIndex="1" GridPane.rowIndex="10" />
-        <ComboBox fx:id="directorCombo" GridPane.columnIndex="2" GridPane.rowIndex="10" prefWidth="230.0">
+        <ComboBox fx:id="directorCombo" GridPane.columnIndex="2" GridPane.rowIndex="10" prefWidth="200.0">
             <items>
                 <FXCollections fx:id="directorList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -101,7 +101,7 @@
         <!--movie writer-->
         <CheckBox fx:id="writerCbx" onAction="#writerCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="11" selected="true"/>
         <Label fx:id="writerLbl" text="Writers: " GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <ComboBox fx:id="writerCombo" GridPane.columnIndex="2" GridPane.rowIndex="11" prefWidth="230.0">
+        <ComboBox fx:id="writerCombo" GridPane.columnIndex="2" GridPane.rowIndex="11" prefWidth="200.0">
             <items>
                 <FXCollections fx:id="writerList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -115,7 +115,7 @@
         <!--movie cast-->
         <CheckBox fx:id="castCbx" onAction="#castCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="12" selected="true"/>
         <Label fx:id="castLbl" text="Cast: " GridPane.columnIndex="1" GridPane.rowIndex="12" />
-        <ComboBox fx:id="castCombo" GridPane.columnIndex="2" GridPane.rowIndex="12" prefWidth="230.0">
+        <ComboBox fx:id="castCombo" GridPane.columnIndex="2" GridPane.rowIndex="12" prefWidth="200.0">
             <items>
                 <FXCollections fx:id="castList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -129,7 +129,7 @@
         <!--movie language-->
         <CheckBox fx:id="languageCbx" onAction="#languageCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="13" selected="true"/>
         <Label fx:id="languageLbl" text="Language: " GridPane.columnIndex="1" GridPane.rowIndex="13" />
-        <ComboBox fx:id="languageCombo" GridPane.columnIndex="2" GridPane.rowIndex="13" prefWidth="230.0">
+        <ComboBox fx:id="languageCombo" GridPane.columnIndex="2" GridPane.rowIndex="13" prefWidth="200.0">
             <items>
                 <FXCollections fx:id="languageList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -144,7 +144,7 @@
         <!--movie country-->
         <CheckBox fx:id="countryCbx" onAction="#countryCbxAction" GridPane.columnIndex="0" GridPane.rowIndex="14" selected="true"/>
         <Label fx:id="countryLbl" text="Countrys: " GridPane.columnIndex="1" GridPane.rowIndex="14" />
-        <ComboBox fx:id="countryCombo" GridPane.columnIndex="2" GridPane.rowIndex="14" prefWidth="230.0">
+        <ComboBox fx:id="countryCombo" GridPane.columnIndex="2" GridPane.rowIndex="14" prefWidth="200.0">
             <items>
                 <FXCollections fx:id="countryList" fx:factory="observableArrayList">
                 </FXCollections>
@@ -163,18 +163,18 @@
         <!--    right output components     -->
         <Text id="intro-text" text="Calculation results:" GridPane.columnIndex="5" GridPane.rowIndex="3" GridPane.columnSpan="2" />
         <Label text="Calculation progress: " GridPane.columnIndex="5" GridPane.rowIndex="4" />
-        <ProgressBar fx:id="progress" prefWidth="130" GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.columnSpan="2" progress="0"/>
-        <Label fx:id="progressStatus" text="Awaiting input..." GridPane.columnIndex="7" GridPane.rowIndex="4" />
-        <Label text="Average directors rating: " GridPane.columnIndex="5" GridPane.rowIndex="5" />
-        <Label fx:id="avgDirectorOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="5" />
-        <Label text="Average writers rating: " GridPane.columnIndex="5" GridPane.rowIndex="6" />
-        <Label fx:id="avgWriterOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="6" />
-        <Label text="Average cast rating: " GridPane.columnIndex="5" GridPane.rowIndex="7" />
-        <Label fx:id="avgCastOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="7" />
-        <Label id="prediction-output" text="Predicted imdb rating: " GridPane.columnIndex="5" GridPane.rowIndex="9" GridPane.columnSpan="2"/>
-        <Label id="prediction-output" fx:id="ratingOutput" text="..." GridPane.columnIndex="7" GridPane.rowIndex="9" />
-        <Label id="prediction-output" text="Predicted revenue: " GridPane.columnIndex="5" GridPane.rowIndex="10" GridPane.columnSpan="2"/>
-        <Label id="prediction-output" fx:id="revenueOutput" text="..." GridPane.columnIndex="7" GridPane.rowIndex="10" />
+        <ProgressBar fx:id="progress" prefWidth="150" GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.columnSpan="2" progress="0"/>
+        <Label fx:id="progressStatus" text="Awaiting input..." GridPane.columnIndex="6" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+        <Label text="Average directors rating: " GridPane.columnIndex="5" GridPane.rowIndex="7" />
+        <Label fx:id="avgDirectorOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="7" />
+        <Label text="Average writers rating: " GridPane.columnIndex="5" GridPane.rowIndex="8" />
+        <Label fx:id="avgWriterOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="8" />
+        <Label text="Average cast rating: " GridPane.columnIndex="5" GridPane.rowIndex="9" />
+        <Label fx:id="avgCastOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="9" />
+        <Label id="prediction-output" text="Predicted imdb rating: " GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.columnSpan="2"/>
+        <Label id="prediction-output" fx:id="ratingOutput" text="..." GridPane.columnIndex="7" GridPane.rowIndex="11" />
+        <Label id="prediction-output" text="Predicted revenue: " GridPane.columnIndex="5" GridPane.rowIndex="12" GridPane.columnSpan="2"/>
+        <Label id="prediction-output" fx:id="revenueOutput" text="..." GridPane.columnIndex="7" GridPane.rowIndex="12" />
 
 
     </children>

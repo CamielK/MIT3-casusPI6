@@ -42,6 +42,7 @@ public class ContinentController {
                 "Spanish",
                 "European",
                 "Arabic",
+                "Asian",
                 "Other"
         );
 
