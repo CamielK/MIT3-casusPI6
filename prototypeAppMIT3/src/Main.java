@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("GUI/GUI.fxml"));
 
-        Scene scene = new Scene(root, 1000, 750);
+        Scene scene = new Scene(root, 1000, 650);
 
         stage.setTitle("Movie predictor");
         stage.setScene(scene);

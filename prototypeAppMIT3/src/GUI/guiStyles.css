@@ -1,5 +1,12 @@
 .root {
-    -fx-background-image: url("background.jpg");
+    /*-fx-background-image: url("background.jpg");*/
+    -fx-background-image: url("doge.jpg");
+    /*-fx-background-color: linear-gradient(#BCCED4, #D1D1D1);*/
+    /*-fx-background-color: #BCCED4;*/
+}
+
+.text {
+    -fx-font-family: "Comic Sans MS";
 }
 
 .label {
@@ -11,7 +18,8 @@
 
 .button {
     -fx-text-fill: white;
-    -fx-font-family: "Arial Narrow";
+    /*-fx-font-family: "Arial Narrow";*/
+    -fx-font-family: "Comic Sans MS";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
@@ -28,21 +36,24 @@
 #intro-header {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-font-family: "Arial Black";
+    /*-fx-font-family: "Arial Black";*/
+    -fx-font-family: "Comic Sans MS";
     -fx-fill: #2A5058;
     /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
 }
 
 #intro-text {
     -fx-font-size: 14px;
-    -fx-font-family: "Arial Black";
+    /*-fx-font-family: "Arial Black";*/
+    -fx-font-family: "Comic Sans MS";
     -fx-fill: #333333;
     /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
 }
 
 #intro-msg {
     -fx-font-size: 12px;
-    -fx-font-family: "Arial Black";
+    /*-fx-font-family: "Arial Black";*/
+    -fx-font-family: "Comic Sans MS";
     -fx-fill: green;
 }
 
