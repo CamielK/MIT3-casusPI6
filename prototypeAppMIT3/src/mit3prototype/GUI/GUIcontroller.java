@@ -1,9 +1,9 @@
-package GUI;
+package mit3prototype.GUI;
 
-import calculators.AverageRating;
-import calculators.RatingPredictor;
-import calculators.RevenuePredictor;
-import inputControllers.*;
+import mit3prototype.calculators.AverageRating;
+import mit3prototype.calculators.RatingPredictor;
+import mit3prototype.calculators.RevenuePredictor;
+import mit3prototype.inputControllers.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,9 +23,6 @@ import java.util.*;
 import java.util.List;
 
 
-/**
- * Created by Camiel on 02-Apr-16.
- */
 public class GUIcontroller implements Initializable {
 
     //main grid
@@ -93,7 +90,7 @@ public class GUIcontroller implements Initializable {
 
     // init method is run when fxml is finished loading
     @Override
-    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+    public void initialize(java.net.URL location, ResourceBundle resources) {
         setOutputComponentsVisible(false);
     }
 
@@ -260,10 +257,10 @@ public class GUIcontroller implements Initializable {
         countryLbl.setStyle("-fx-text-fill: #333333;");
 
         //makes a list of all error messages that should be displayed
-        java.util.List<String> errorMessages = new ArrayList<String>();
+        List<String> errorMessages = new ArrayList<String>();
 
         //add input data to a list. if input is disabled "Unused predictor" is added to this list. format: (releaseYear, mpaaRating, runtime, budget, genre, driector, writer, cast, language, country)
-        List<String> inputData = new ArrayList<String>();
+        List<String> inputData = new ArrayList<>();
 
         // >>> check form input <<<
         //check release year input

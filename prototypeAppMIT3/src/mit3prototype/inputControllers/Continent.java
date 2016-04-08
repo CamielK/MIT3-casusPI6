@@ -1,4 +1,4 @@
-package inputControllers;
+package mit3prototype.inputControllers;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

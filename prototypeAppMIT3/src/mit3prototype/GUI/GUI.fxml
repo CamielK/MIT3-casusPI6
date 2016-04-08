@@ -14,10 +14,10 @@
 <?import javafx.scene.text.*?>
 
 <!--    main grid   -->
-<?import com.sun.javafx.scene.control.skin.EndButton?>
-<GridPane fx:id="grid" alignment="center" hgap="10" styleClass="root" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIcontroller">
+<GridPane fx:id="grid" alignment="center" hgap="10" styleClass="root" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mit3prototype.GUI.GUIcontroller">
     <stylesheets><URL value="@guiStyles.css" /></stylesheets>
     <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
+
     <!--<gridLinesVisible>true</gridLinesVisible>-->
 
 
