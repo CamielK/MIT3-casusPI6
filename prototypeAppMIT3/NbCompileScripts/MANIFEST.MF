@@ -1,0 +1,468 @@
+Manifest-Version: 1.0
+Implementation-Vendor: Camiel
+JavaFX-Version: 2.2
+Implementation-Title: Mit3Prototype
+Implementation-Version: 1.0
+JavaFX-Application-Class: mit3prototype.MainStart
+JavaFX-Class-Path: 
+Created-By: JavaFX Packager
+Main-Class: com/javafx/main/Main
+
+Name: mit3prototype/inputControllers/Continent$1.class
+SHA-256-Digest: +gU8CWtLp29vY6xn8+Uase2HfVBlLRwsCM8F1kPQgQ8=
+
+Name: com/javafx/main/Main.class
+SHA-256-Digest: STNkplnAZaLrF8fydnexjltw35J+6IV8bfwtRmMid+s=
+
+Name: mit3prototype/inputControllers/Writer.class
+SHA-256-Digest: OErWw4L18mlNV7os6wagnHNQ3qWNiXggh6evnWz35yw=
+
+Name: mit3prototype/inputControllers/Genre$1.class
+SHA-256-Digest: 2xOmQ6CPNte/4qUNQr4YRzwE1ZNYImdscvyzvABLytQ=
+
+Name: mit3prototype/inputControllers/Genre$2.class
+SHA-256-Digest: sIcBxZvQtRM3yruzU4rSVrecvtJ/c6biObegvU45z7U=
+
+Name: mit3prototype/GUI/guiStyles.css
+SHA-256-Digest: m7/LXvR+kBzzcaDhDO83T3Fp80Xcp/LqPjXgniXBr9s=
+
+Name: mit3prototype/inputControllers/HelpDialog$1.class
+SHA-256-Digest: +4yj4aRo7nxyIrpnAsMkTYASoHa6koWbsq3jfKDc89I=
+
+Name: mit3prototype/inputControllers/HelpDialog.class
+SHA-256-Digest: 8MFt5E6h3vcL3Y9d0OUhcYyJNWdxm+KqGb1fs/6MPYI=
+
+Name: mit3prototype/inputControllers/Cast$2.class
+SHA-256-Digest: K+f8cnhUtjO/LMIVehfcA2oVJcH8lPtGyW5edOIBcVY=
+
+Name: mit3prototype/inputControllers/RemoveDialog$2.class
+SHA-256-Digest: bT01zkIURCOB721cbfi+xzvztCoYugNwYBaz0SIHBTM=
+
+Name: mit3prototype/inputControllers/RemoveDialog.class
+SHA-256-Digest: Tr00mYUUD+5+77N2boKdD+NERH+V6/8y3hLxYv5gO3E=
+
+Name: mit3prototype/inputControllers/Director.class
+SHA-256-Digest: EJ3a4I1EKabhLvQuVhdIlXIPec6hTXK9tJ86qZZvhbk=
+
+Name: mit3prototype/MainStart.class
+SHA-256-Digest: 3nsNeFgFK8ebgvtbwdSvHBEDYHqeccInTfyZxyC6ZMY=
+
+Name: mit3prototype/inputControllers/Cast$3.class
+SHA-256-Digest: dVRa+NmSKP87j1esQee2zyi/tBk3/W2xg+mlt3koXWA=
+
+Name: mit3prototype/inputControllers/Writer$4.class
+SHA-256-Digest: 0OEOVFs1NhYwxomtWczoAohX68cF47lDBRpMGS25MDE=
+
+Name: mit3prototype/inputControllers/Writer$2.class
+SHA-256-Digest: aKHUCGsKTEDbGd0F8kJwzn7N747L/0XlblK8nuPeN+M=
+
+Name: mit3prototype/inputControllers/Genre.class
+SHA-256-Digest: y1A1u+yfYSzqsxaWko1Cav6UrLb008xIN7lyEOSvd7g=
+
+Name: mit3prototype/inputControllers/Cast$1.class
+SHA-256-Digest: rQ8SuM6VfB/3ihhedg2A09DCbs1AzgFm6CmOi4eIWrw=
+
+Name: mit3prototype/inputControllers/Director$3.class
+SHA-256-Digest: N5Rxet/QILGU9Ib3QvQB+iV+QUwehcHeXLKI1Ga51So=
+
+Name: mit3prototype/inputControllers/Cast$CastQuery.class
+SHA-256-Digest: uW/w375ii3YJ26D3b+3Bbse5nY3n1UAtWlq5XeH6INE=
+
+Name: mit3prototype/inputControllers/Director$1.class
+SHA-256-Digest: sWJHTG23JSQTyCA2MxQYEb9U+oxktGcy00LTR4/A1as=
+
+Name: mit3prototype/calculators/RevenuePredictor.class
+SHA-256-Digest: OQV5qjBpKPmYtu08Ebsv4jFhe60SzD6aNFzVazwAGYs=
+
+Name: mit3prototype/inputControllers/Continent$2.class
+SHA-256-Digest: b6n1zV3yWJoB8VONSXkGeBQ2H2YvJULs12RHqTxTr3U=
+
+Name: com/javafx/main/Main$2.class
+SHA-256-Digest: vZSZLfGvC6SeQGWGSpezFhSgrDrSvZRDLqJTFP6SVdY=
+
+Name: mit3prototype/inputControllers/Writer$3.class
+SHA-256-Digest: zpn8RbJMxnB+UsdiNOq0wfdiEm8HZAG01LSc9/0v22w=
+
+Name: mit3prototype/inputControllers/Director$5.class
+SHA-256-Digest: ZbUBubaCtjtoADDY3tb1ZbHenb9rVqMT63NCUVfQkpU=
+
+Name: mit3prototype/data/MainDbReader.class
+SHA-256-Digest: 6KBy9xbbn8hd/xoZ+R9Pqti1FM/5ZQoQxlE3twEX1Ws=
+
+Name: mit3prototype/inputControllers/Writer$WriterQuery.class
+SHA-256-Digest: COJx87zDkm8j+7VtLm8GcVz+wHzOu8qRk340Gh1Lrl4=
+
+Name: com/javafx/main/NoJavaFXFallback.class
+SHA-256-Digest: jvGBkWbtsUnepWPF8LiNlcXwm4Lud9yixXLGZB/Uih8=
+
+Name: mit3prototype/inputControllers/Continent.class
+SHA-256-Digest: 2reZN3MjTYijTpSm3HoS3IOwOIdBDs11VdJgo+1bJmc=
+
+Name: mit3prototype/inputControllers/Director$DirectorQuery.class
+SHA-256-Digest: +isPaXtT+C4f9QdVeiorkyROxPMcWPpz6RNmHWAEDb4=
+
+Name: mit3prototype/GUI/GUIcontroller$1.class
+SHA-256-Digest: D6UiBbACjn4iuA7IIAl6MrTiNZLg2zqIAorJfarCgMs=
+
+Name: mit3prototype/inputControllers/Cast$5.class
+SHA-256-Digest: foo7RXX68yY3G8lQM5uISx9ZeHrhCJsLGohWYdvMh8Y=
+
+Name: mit3prototype/inputControllers/Cast.class
+SHA-256-Digest: kYIjHk9HLP5AX4u5u8YEg2tJpWPgD9P7n6m2xTL/meM=
+
+Name: mit3prototype/inputControllers/Writer$5.class
+SHA-256-Digest: w/pIomEPfmIYhovOVoZnrqi5Zg9b/VApOSqS/A2qxkI=
+
+Name: mit3prototype/GUI/GUI.fxml
+SHA-256-Digest: tPixzhcdFCUM173RDBscX78fsYrxRrbHJ8nCzEvWadM=
+
+Name: mit3prototype/GUI/GUIcontroller.class
+SHA-256-Digest: xGpLVjx/mgvb1uTjFpbKphMyyTyjkJFDA2UB7hEQdgA=
+
+Name: mit3prototype/inputControllers/RemoveDialog$1.class
+SHA-256-Digest: ldBo3ITI2UGsfd+90Eu6fBjfW/ric5Gk1tH3HDmy29s=
+
+Name: mit3prototype/inputControllers/Writer$1.class
+SHA-256-Digest: dScQgVG9moVKbzM/+1bPN/QqYGFoCfiVM+8Ol39b67E=
+
+Name: mit3prototype/data/RatingCalcDbReader.class
+SHA-256-Digest: YYf/B2q2Veq09DgK5V25SdSwSSyHNznDQmLIJWSu34o=
+
+Name: mit3prototype/inputControllers/Cast$4.class
+SHA-256-Digest: nbsxf95Kfd5xq26D/haqyV4QdE1IIsJnq0n+0rM79tI=
+
+Name: com/javafx/main/Main$1.class
+SHA-256-Digest: Va4S3oQbyRywYzYUOxCBCMWtMWBV9dQKLRxHcYpdroc=
+
+Name: mit3prototype/inputControllers/Director$4.class
+SHA-256-Digest: cM7gPLsp8j0m+0Bn3aVGAGfsuxvtqfrcq0Byi1HA84M=
+
+Name: mit3prototype/calculators/RatingPredictor.class
+SHA-256-Digest: zuApBaMu/g35q18Bn+ifi/uaI8ZkOSKvpXTr0OOAG1w=
+
+Name: mit3prototype/calculators/AverageRating.class
+SHA-256-Digest: ycJibckMRPpILxSXQ574OsfRcyhdqOmTson6/Z/zPw0=
+
+Name: mit3prototype/inputControllers/Director$2.class
+SHA-256-Digest: JJfwmOQqwv/RZV/z+JV43Jlb74MtcNzCWmTFS5s8LPk=
+
+Name: mit3prototype/data/ratingCalcDatabase.csv
+SHA-256-Digest: AvveelDZSVjrQFEb8FUFzuwyFa2rm96lW86lUYkYnc0=
+
+Name: org/relique/io/EncryptedFileInputStream.class
+SHA-256-Digest: VK4wEsR+XtgWdvt7kdk7GptfVASpMxvxkjcsPcyZs5k=
+
+Name: org/relique/jdbc/csv/CsvConnection.class
+SHA-256-Digest: YwjPV667XBjQJKatwHpSU0aSXgD2DtYwX3WUIKUVrHE=
+
+Name: org/relique/jdbc/csv/SqlParser.class
+SHA-256-Digest: eCXsIvlwCZYp9+vA5k7BHZ4c9hB/IDRYvHT9SO8h9pk=
+
+Name: org/relique/jdbc/csv/SQLNullIfFunction.class
+SHA-256-Digest: eiRPVb/+gKat815tMKEJ25ci0d5uB0Cp7wbVKfFg/bI=
+
+Name: org/relique/jdbc/csv/CsvStatement.class
+SHA-256-Digest: x2DP59c3FjRabl/In06dHqGWZSb/z0Q65SnnKYFB7Sg=
+
+Name: org/relique/io/XORCipher.class
+SHA-256-Digest: Ph1lbsR0fy6GpFXxFL0ub27WLKoxzBT/Pn1UQCRlQcE=
+
+Name: org/relique/jdbc/csv/OrderByEntry.class
+SHA-256-Digest: F3ot616RDi6B3METmMeE43ZUZSOVIa6ZZosmthSaqio=
+
+Name: org/relique/jdbc/csv/SubQueryRowMatcher.class
+SHA-256-Digest: SG93t3HOGqEwloUrOOqAQVm7R+EQ612DzzIeBkYqPRU=
+
+Name: org/relique/jdbc/csv/SQLHourOfDayFunction.class
+SHA-256-Digest: X+phF72VRMxPROdPTDvLuCYfnvNxi6bK/0Q/A4e7ngo=
+
+Name: org/relique/io/EncryptedFileOutputStream.class
+SHA-256-Digest: J/JB76hntc2JQ461+tX/kFutskc3bQNFG6+gOKak89s=
+
+Name: org/relique/jdbc/csv/SQLCalendarFunction.class
+SHA-256-Digest: 6PpOBx0EWUfVfF9syiIcKRMvhey+/2RflNyyCQSkvHE=
+
+Name: org/relique/jdbc/csv/CsvReader.class
+SHA-256-Digest: fisHu3u57lMlb9J3Rtrcqaa6U3yWo+z7jmpDhmrqQ74=
+
+Name: org/relique/io/FileSetInputStream.class
+SHA-256-Digest: gAgbhlfZ4wVexHeCy5Hq0SjyoQCHaoaDa8W0yAD6mNo=
+
+Name: org/relique/jdbc/csv/IsNullExpression.class
+SHA-256-Digest: BRbiRGKvBOPZBUMS2YGdcsdPtLcJvLuM4r4oYTeCRT4=
+
+Name: org/relique/jdbc/csv/SQLSecondFunction.class
+SHA-256-Digest: 9Qqi1DgSYpVTx/FNsymQIMw6zVax2kuzqoa7F/NNv48=
+
+Name: org/relique/io/ListDataReader.class
+SHA-256-Digest: U196Jwrrw51h1x1VotNYTq3DESTTcAgCzXpOgNBwS6g=
+
+Name: org/relique/jdbc/csv/NumericConstant.class
+SHA-256-Digest: lGXvQuFm1iu8c2rMTvyzc5CpSR+7jc2MPBHGCIhOZzI=
+
+Name: org/relique/jdbc/dbf/DbfClassNotFoundException.class
+SHA-256-Digest: 4FasxyNcRMLmDMdjM0R4je00HN3FAQyHtOxJ49amhyA=
+
+Name: org/relique/jdbc/csv/MultipleSqlParser.class
+SHA-256-Digest: +ZndyYTVqYRLdHd2cv2JJZDERhe875qjfPQu6dRsff4=
+
+Name: org/relique/jdbc/csv/CsvResultSetMetaData$1.class
+SHA-256-Digest: FW1S8lUgQ+gYGBc+nUs81mThI4c0s0V0bwHCyBCCazM=
+
+Name: org/relique/jdbc/csv/AndExpression.class
+SHA-256-Digest: YUM2ugG7xGqaXBjb8V2qjjL7hcRKP0QhWy3pEpnNADs=
+
+Name: org/relique/jdbc/csv/SimpleCharStream.class
+SHA-256-Digest: ZcGfs9HquUQ8PYagU9Qbva3LcP1s3XTpUMC+Jn/OSJA=
+
+Name: org/relique/jdbc/csv/MinimumMemoryMap$1.class
+SHA-256-Digest: xKpT8kjUx2isiKFc7jbGx0/OOAwJ5lDORDUmHgO1/3I=
+
+Name: org/relique/jdbc/csv/SQLAvgFunction.class
+SHA-256-Digest: 5z6eIIiNquiLOKm4wEDwxbuOMSr1ImZfjMCCwSB/IqI=
+
+Name: org/relique/jdbc/csv/SubQueryEqualsRowMatcher.class
+SHA-256-Digest: cHxxGETV+D8nZQi3ZJtOdTk68ZLNArXorZvQZRZ00Z8=
+
+Name: org/relique/jdbc/csv/ExpressionParser.class
+SHA-256-Digest: aJXDFCaLsPrLMh6fluLoLHEUZKW4gwmewLQvdCcTVR8=
+
+Name: org/relique/jdbc/csv/MinimumMemoryMap.class
+SHA-256-Digest: uv8Nw8kcpuSjhbWmpMGRaY1VPxO9GmB7RXrnuhSZwfM=
+
+Name: org/relique/jdbc/csv/RelopExpression.class
+SHA-256-Digest: lVZYoDc2HGtfTAvDdbQjHqTLbrba1k3Vy/GcW8Zv/rw=
+
+Name: org/relique/io/DataReader.class
+SHA-256-Digest: J8gqZ1gwEtOYawWXryxoNo1be593kTAWNkUNU4dghUI=
+
+Name: org/relique/jdbc/csv/SQLMinFunction.class
+SHA-256-Digest: K0NDkqXcrTvuHFBNEYz0IaDfCSS2qGVxfiGjl/XQbtM=
+
+Name: org/relique/jdbc/csv/ExistsExpression.class
+SHA-256-Digest: y6NceF+gR03v67U77OezxbVwcDdko90Ab7P8EdNyCFk=
+
+Name: org/relique/io/CryptoFilter.class
+SHA-256-Digest: BFrsKlOj7CiNGgSbXXtCl0nVuJXvWMQVVXESec5V9bE=
+
+Name: org/relique/jdbc/csv/ParsedExpression.class
+SHA-256-Digest: 5F3fiFPNPspE9CODeJeabPXPPdq0Li5KW8KyLVXGCSE=
+
+Name: org/relique/jdbc/csv/SQLTrimFunction.class
+SHA-256-Digest: cgwL+XOY3l9P5xs6KKdJGj8hBkqHRB5jZGy5Wum/gH0=
+
+Name: org/relique/jdbc/csv/SubQueryExpression.class
+SHA-256-Digest: 1FYH46uEhpoDlh8jxjrpZcK1ZvmsVpkZ8mf7PSr8J/A=
+
+Name: org/relique/jdbc/csv/StringConstant.class
+SHA-256-Digest: Cxr53gQp6IdH/4YTwhlrgM1g8TzqQxQOnWvzr/X4b1E=
+
+Name: org/relique/jdbc/csv/SQLSubstringFunction.class
+SHA-256-Digest: gmGWBuJQSycd1SwoMEYPkJcjclzHqBN0sL90ya4gK6M=
+
+Name: org/relique/jdbc/csv/CsvResources.class
+SHA-256-Digest: u+8nFJ8ZPIqgNURd2YpC1j8wK2neSMMjXyEqAAoMg3Q=
+
+Name: org/relique/jdbc/csv/CsvRawReader.class
+SHA-256-Digest: vrcxjy5aI+sdYHvISGTTgQn2pR6LUIR9PIGKfcETpG0=
+
+Name: org/relique/jdbc/csv/SQLUserFunction.class
+SHA-256-Digest: f7P2ST+dZX2bWQEVTEDXgPjjQbzJxjOj7BwU17hH+3A=
+
+Name: org/relique/jdbc/csv/ExpressionParser$1.class
+SHA-256-Digest: KpJho+fmr5TA3Xgp8qtaSaSVpU+702/ogo3f+lXtCtU=
+
+Name: org/relique/jdbc/csv/SQLAbsFunction.class
+SHA-256-Digest: w5CAqivYpT+f7SxLiD73a0ymlPG1EzW87xX2PGHeWQM=
+
+Name: org/relique/jdbc/csv/SQLUpperFunction.class
+SHA-256-Digest: OZXTJ0MYWoMwYIJRb2D8lgKpiS0Pi/PmympF+PgfECc=
+
+Name: org/relique/jdbc/csv/Token.class
+SHA-256-Digest: I1x+2mC26VPRHMhS4ve7pi+XZziwIts1CiM1rjT9WnI=
+
+Name: org/relique/jdbc/csv/ExpressionParser$LookaheadSuccess.class
+SHA-256-Digest: zCuiN26qdnb3776Oc/i9ZMOnKqfrHEaa17feL1dgiCs=
+
+Name: org/relique/jdbc/csv/ParseException.class
+SHA-256-Digest: ZpI2XWRUtDQxWqSnd/ohyd0JjNTQANpZ17whvQkQx8M=
+
+Name: org/relique/jdbc/csv/AggregateFunction.class
+SHA-256-Digest: y0XfyqgXuEmPBNSgGMocgC+CYb0HExI+k1C95cc6/GM=
+
+Name: org/relique/jdbc/csv/CsvSavepoint.class
+SHA-256-Digest: ZZlvOBjedeH1gL00ets9x5UzvnuSPI/faUibncaHmEc=
+
+Name: org/relique/jdbc/csv/SQLLowerFunction.class
+SHA-256-Digest: lgPdsnPU9+SS3kVUVeIaaT7SQssSkJghdh5xy7D/AGw=
+
+Name: org/relique/jdbc/csv/SQLCountFunction.class
+SHA-256-Digest: 9w6oAK0rjQ9x6EUBWrnosbRI0qyagI8jX730Qf4GW1s=
+
+Name: org/relique/jdbc/csv/ZipFileTableReader.class
+SHA-256-Digest: cH9zdpaawg79vdUVHR0J6MJ0x89TivE7whGeALAb8lc=
+
+Name: org/relique/jdbc/csv/QueryEnvEntry.class
+SHA-256-Digest: twu5cr/2FVWhdkepBm171wVzwUmL5GX5QBJouPjE5gg=
+
+Name: org/relique/jdbc/csv/SQLMinuteFunction.class
+SHA-256-Digest: GMQGKr4VEA/9dKGn1AXedxWfFu8DdHDPUoztPpR+9aY=
+
+Name: org/relique/jdbc/csv/CurrentTimeConstant.class
+SHA-256-Digest: M4cgPebrvO4e9kd2ceSU85Y9m2KOEzRuZVlCXjUAucY=
+
+Name: org/relique/jdbc/csv/SQLSumFunction.class
+SHA-256-Digest: /Pa7HBIzLYarv5vGyPee+BkcYZ6NpAT8RXDjFMDFJyU=
+
+Name: org/relique/jdbc/csv/SQLYearFunction.class
+SHA-256-Digest: DDEsEm6mPsOvgyPOwroqATbzH7R8kPmtKbDUBYIAwDk=
+
+Name: org/relique/jdbc/csv/AsteriskExpression.class
+SHA-256-Digest: cxpKbHTkVlF3VCPKK8vnkerIfgmIPPqw7G63kSs3vA0=
+
+Name: org/relique/jdbc/csv/SearchedCaseExpression.class
+SHA-256-Digest: IlSuxOgZzYqnPCd3u3cWDWDubV+Z0h06VIcZvZoU8nY=
+
+Name: org/relique/jdbc/csv/SQLMonthFunction.class
+SHA-256-Digest: dExnMjshpKueWcYxxq0w5HkZ79f9QIkutWQ1GACpnnY=
+
+Name: org/relique/jdbc/csv/Placeholder.class
+SHA-256-Digest: 1216dQ/2cPVFJX+pioKT1WbtKLhFMxTT9xf37Lx36Ww=
+
+Name: org/relique/jdbc/csv/CsvDriver.class
+SHA-256-Digest: KKBTOguSNtJx/4kqXQJ4QYZPNhWySqwam8ZJxkS4MaY=
+
+Name: org/relique/jdbc/csv/CsvPreparedStatement.class
+SHA-256-Digest: Aw+Sa0KafGanLH8TqOwTRiGkmU12p5icSjWIOIIaTzU=
+
+Name: org/relique/jdbc/csv/CsvResultSetMetaData.class
+SHA-256-Digest: DgYjM/qJt7wYOKmyIzTj1qD/1J4e/Ja6duVCJ9tW0ow=
+
+Name: org/relique/jdbc/csv/BetweenExpression.class
+SHA-256-Digest: zx+ntgAjYv+dWvuskZcccWGkq5mSwMzd2RI2KaGFizM=
+
+Name: org/relique/jdbc/csv/LikePattern.class
+SHA-256-Digest: KXe9bNlks90jZG5oMrTZrmMiCSPNwXnjW1AvvVxrwCA=
+
+Name: org/relique/jdbc/csv/CsvResultSet$OrderByComparator.class
+SHA-256-Digest: skYiLyI5royjBiNaNAmNSWRnIeWkipCqqHj06xBdoMU=
+
+Name: org/relique/jdbc/csv/MinimumMemoryMap$KeyHashCodeComparator.clas
+ s
+SHA-256-Digest: WC7LyTGy/xDo7UKB8HWfgl1rdEBXVDtwb7zAtq6plBY=
+
+Name: org/relique/jdbc/csv/ExistsExpressionSubQueryRowMatcher.class
+SHA-256-Digest: uJBK2RBBPKrg4FeF0umZd8a4lZuCj4LvSnrx5um769c=
+
+Name: org/relique/jdbc/csv/ParsedStatement.class
+SHA-256-Digest: Ba2pUVDYY4ED0THriBg5jp+IuhCHX8MPOHC/sJ2ymKw=
+
+Name: org/relique/jdbc/csv/SQLTrimFunction$Type.class
+SHA-256-Digest: jowbcSG0Y+YED3vvZvjAFzvXpRYrUpfHQgURclDiEbo=
+
+Name: org/relique/jdbc/csv/CsvResultSet$OrderByException.class
+SHA-256-Digest: n/X78B2FzsxxOPAehokITxS/yg3YYBkeZMeypH5WBlk=
+
+Name: org/relique/jdbc/csv/StringConverter.class
+SHA-256-Digest: 4RHKT1bb4pxs/eeh4n5yXnAOh3Kcm+jg2V7CHWJnf4s=
+
+Name: org/relique/jdbc/csv/StringConverter$1.class
+SHA-256-Digest: lbcT4OUM7YOqJFWEY/CTvRVIfeTYoS+8GwG65OicbyU=
+
+Name: org/relique/jdbc/csv/SQLRoundFunction.class
+SHA-256-Digest: z7c2f7+yw56XJE8jaZnQORP5NgGKgb1h6ccgzL5Wi/I=
+
+Name: org/relique/jdbc/csv/SQLCoalesceFunction.class
+SHA-256-Digest: 7x5zg3k0OYDRTTQvCvm/iKi/zCRMHj0G8ESg5wANmcY=
+
+Name: org/relique/jdbc/csv/SQLStringAggFunction.class
+SHA-256-Digest: Egxcfx0DZqofEvvYCcfUcmw8xR8nmLJXk4+CG4HStqE=
+
+Name: org/relique/jdbc/csv/ExpressionParser$JJCalls.class
+SHA-256-Digest: hjIzvY/gnO8akZulQ7wVkyvyssFjkOz134FLDYWN/ps=
+
+Name: org/relique/jdbc/csv/InExpression.class
+SHA-256-Digest: 1yEZoaSfx9m5kojyIVAYKklh3rrkXrgCelWQI+a4FhY=
+
+Name: org/relique/jdbc/csv/CurrentDateConstant.class
+SHA-256-Digest: BotdCfcm9zUEicafKTMSWIG9lJ2seW6ZBf/DkUGgAKU=
+
+Name: org/relique/jdbc/csv/SQLMaxFunction.class
+SHA-256-Digest: pIfc9F1Q7a2tSl3TD3TCUX/iQok9R8zxQKgzvc2uI38=
+
+Name: org/relique/jdbc/csv/SQLLengthFunction.class
+SHA-256-Digest: UOdA2AcxhH8oUuI2Z1xHjiQaYAfd1wL1JdaoFN6prmw=
+
+Name: org/relique/jdbc/csv/Expression.class
+SHA-256-Digest: 6xZtYdnTuI2+DdEG68DrHTE2XusLoCuF1wxnr67CLog=
+
+Name: org/relique/jdbc/csv/NullConstant.class
+SHA-256-Digest: kNaNyauYZNiaVsjiqQTh3iI00DEkNe7YY9Vua9er+bw=
+
+Name: org/relique/io/TableReader.class
+SHA-256-Digest: 8k2vRiqihU/KUre0WfEQanGIatmP6lWtsuZQzkOtO2Y=
+
+Name: org/relique/jdbc/csv/ExpressionParserTokenManager.class
+SHA-256-Digest: FBAm8YVV69oU0GEqxTu2Mk2tYC+LUQsu0WjehR6lk4w=
+
+Name: org/relique/jdbc/csv/CsvConnection$1.class
+SHA-256-Digest: 6/jENswYq44iHISpvadpBkQjI5HVI/xAewduEmYudsI=
+
+Name: org/relique/jdbc/csv/TokenMgrError.class
+SHA-256-Digest: IWiZtHUgfJY2yZfdlaCUlSldE8Fr63f8hgDmYbi7V9U=
+
+Name: org/relique/jdbc/csv/ExpressionParserConstants.class
+SHA-256-Digest: MvWFSdLnafeWuSGMr3/qIQkPUROrcSQCPAYqQfVuFuw=
+
+Name: org/relique/jdbc/csv/SQLDayOfMonthFunction.class
+SHA-256-Digest: 7VMKsIoXn7e3exbDlBuno7I1okpYrSvic0nHgW0UxEo=
+
+Name: org/relique/jdbc/csv/LogicalExpression.class
+SHA-256-Digest: oaSaQKLMT8yVx3fb2I/Ja3Y3eQggbbEO54Vz6IFvXww=
+
+Name: META-INF/services/java.sql.Driver
+SHA-256-Digest: /3SozY82jb95cHiQGUirteLm3qvefiponwsFy0uVjoU=
+
+Name: org/relique/jdbc/csv/CsvResultSet.class
+SHA-256-Digest: waJEvjSpLdq6gnnxDGPv8GHdh/otZawbLFE4Lb0iPi8=
+
+Name: org/relique/jdbc/csv/messages.properties
+SHA-256-Digest: AS4S4x3Di87St27Xhuz2zpLzhvENPyGgWqaY3q7KQcI=
+
+Name: org/relique/jdbc/csv/LikeExpression.class
+SHA-256-Digest: 6g6DZoWpNM5s+N7R4SAC+xPESTiWK6ZlfuEqhz/LxQc=
+
+Name: org/relique/jdbc/csv/ParsedTable.class
+SHA-256-Digest: Fqsr2GyWCxPD3651u41c5hbpTkNLfaNykiSSMPw3+Nk=
+
+Name: org/relique/jdbc/dbf/DbfReader.class
+SHA-256-Digest: P6jpM5Dk9xTV6j0K8BIn1nGSePaZyZ3lK9iuJVotbzc=
+
+Name: org/relique/jdbc/csv/SimpleCaseExpression.class
+SHA-256-Digest: /T+RqQSr2eLVrpxswGNQwLkfdLWYxxKokLn6h5PNlNU=
+
+Name: org/relique/jdbc/csv/CsvMain.class
+SHA-256-Digest: 5MANcyVzgLM3ZxniDb99Vpz2BLJPnlDezKO58vSWMLY=
+
+Name: org/relique/jdbc/csv/OrExpression.class
+SHA-256-Digest: OO2Fsz2MIUXPyHc4lvOSl+X1VDnWeq6/P8M8eFwq6XE=
+
+Name: org/relique/jdbc/csv/NotExpression.class
+SHA-256-Digest: bdJHEv/VXafElMvDihy5xwD2y2RJOwfEgssP2axPA4E=
+
+Name: org/relique/jdbc/csv/JoinType.class
+SHA-256-Digest: KVX9vASS66j8VAz4bzp24+n1aULSOau0bkHeVPVwuX0=
+
+Name: org/relique/jdbc/csv/InExpressionSubQueryRowMatcher.class
+SHA-256-Digest: uhPPNYbr2DTo5if4HYOtz14QhwHwiHnIsRR+9W/55yg=
+
+Name: org/relique/jdbc/csv/CsvDatabaseMetaData.class
+SHA-256-Digest: 5wmZGSCUK4HrTlE39WY8PK1lsN8Zh6DtONIg/3iYLXc=
+
+Name: org/relique/jdbc/csv/ColumnName.class
+SHA-256-Digest: FYFGPDJoBKrRQ8eLGdVkZJU9Uek8NEOO2dpCtyGc/kk=
+
+Name: org/relique/jdbc/csv/BinaryOperation.class
+SHA-256-Digest: dFntoAUHQiHm6BBCBJeYs0PtoJMtQNdEDd3rg2aFFwM=
+
+

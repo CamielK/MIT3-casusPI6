@@ -42,6 +42,7 @@ public class Cast {
     private static ComboBox<String> searchBox;
     private static ProgressIndicator indicator;
     private static Text errorComponent;
+    private final int minCharsBeforeSearch = 2;
 
     //create a dialog for the user to select a new actor. returns the chosen actor
     public String addCast(ComboBox<String> comboBox) {
@@ -82,7 +83,7 @@ public class Cast {
             @Override
             public void handle(KeyEvent keyEvent) {
                 //System.out.println(searchBox.getEditor().getText());
-                if (searchBox.getEditor().getText().length()>3 && keyEvent.getCode() != KeyCode.DOWN && keyEvent.getCode() != KeyCode.UP && keyEvent.getCode() != KeyCode.LEFT && keyEvent.getCode() != KeyCode.RIGHT) { //start query when keys are pressed and search string is bigger then 3 chars
+                if (searchBox.getEditor().getText().length()>minCharsBeforeSearch && keyEvent.getCode() != KeyCode.DOWN && keyEvent.getCode() != KeyCode.UP && keyEvent.getCode() != KeyCode.LEFT && keyEvent.getCode() != KeyCode.RIGHT) { //start query when keys are pressed and search string is bigger then 3 chars
                     //errorComponent.setText("");
                     indicator.setProgress(-1.0);
                     indicator.setVisible(true); //display search indicator
