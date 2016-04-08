@@ -1,5 +1,8 @@
 package mit3prototype.inputControllers;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,10 +11,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -28,30 +28,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+//this program uses the csvjdbc library to work directly with csv files. get JAR at: http://csvjdbc.sourceforge.net/
 import mit3prototype.data.RatingCalcDbReader;
 import org.relique.jdbc.csv.CsvDriver;
 
 /**
  * Created by Camiel on 06-Apr-16.
  */
-public class Writer {
+public class Director {
 
-    //variables
-    private static String addedWriter;
+    private static String addedDirector;
     private static Stage parentStage;
     private static ComboBox<String> searchBox;
     private static ProgressIndicator indicator;
     private static Text errorComponent;
 
-
-    //create a dialog for the user to select a new writer. returns the chosen writer
-    public String addWriter(ComboBox<String> comboBox) {
+    //create a dialog for the user to select a new director. returns the chosen director
+    public String addDirector(ComboBox<String> comboBox) {
         final ObservableList<String> selectionModel = comboBox.getItems();
         this.parentStage = (Stage) comboBox.getScene().getWindow();
 
-
         //explanation message
-        Text msg = new Text("Start typing to search the writer you would like to add");
+        Text msg = new Text("Start typing to search the director you would like to add");
 
         //error message
         errorComponent = new Text();
@@ -90,7 +88,8 @@ public class Writer {
                     //searchBox.setDisable(true); //disable while searching
                     searchBox.getItems().clear(); //clear combo box
                     String searchString = searchBox.getEditor().getText();
-                    new WriterQuery(searchString).start();
+                    new DirectorQuery(searchString).start();
+                    //findDirector(searchBox.getEditor().getText()); //start query
 
                 }
             }
@@ -104,27 +103,27 @@ public class Writer {
         sep.setVisible(false);
 
         //add button
-        final Button add = new Button("Add writer");
+        final Button add = new Button("Add director");
         add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
 
                 if (searchBox.getSelectionModel().isEmpty()) {
-                    errorComponent.setText("Please select a writer or cancel..");
+                    errorComponent.setText("Please select a director or cancel..");
                 }
                 else {
-                    boolean writerAlreadyAdded = false;
+                    boolean directorAlreadyAdded = false;
                     for (String item : selectionModel) {
                         if (item.equals(searchBox.getSelectionModel().getSelectedItem())) {
-                            writerAlreadyAdded = true;
+                            directorAlreadyAdded = true;
                         }
                     }
-                    if (writerAlreadyAdded) {
-                        errorComponent.setText("Writer is already added..");
+                    if (directorAlreadyAdded) {
+                        errorComponent.setText("Director is already added..");
                     }
                     else {
-                        Writer.addedWriter = searchBox.getSelectionModel().getSelectedItem();
+                        Director.addedDirector = searchBox.getSelectionModel().getSelectedItem();
                         Stage stage = (Stage) add.getScene().getWindow();
                         stage.close();
                     }
@@ -142,7 +141,7 @@ public class Writer {
         cancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Writer.addedWriter = "null";
+                Director.addedDirector = "null";
                 Stage stage = (Stage) cancel.getScene().getWindow();
                 stage.close();
             }
@@ -163,16 +162,16 @@ public class Writer {
                 alignment(Pos.CENTER).padding(new Insets(50)).build()));
         dialogStage.showAndWait();
 
-        return addedWriter;
+        return addedDirector;
     }
 
 
-    //this sub class does a query in a new thread to find any writers that contain the search string.
-    public class WriterQuery extends Thread {
+    //this sub class does a query in a new thread to find any directors that contain the search string.
+    public class DirectorQuery extends Thread {
 
         private String searchString;
 
-        public WriterQuery (String searchString) {
+        public DirectorQuery (String searchString) {
             this.searchString = searchString.toLowerCase();
         }
 
@@ -206,47 +205,38 @@ public class Writer {
 
                 //do the query
                 conn.setAutoCommit(false);
-                PreparedStatement stmt = conn.prepareStatement("SELECT Writer FROM ratingCalcDatabase");
-                ResultSet writerFields = stmt.executeQuery();
+                PreparedStatement stmt = conn.prepareStatement("SELECT Director FROM ratingCalcDatabase");
+                ResultSet directorFields = stmt.executeQuery();
 
                 //check results
-                while(writerFields.next()) {
+                while(directorFields.next()) {
                     //get next field
-                    String writerField = writerFields.getString("Writer");
+                    String directorField = directorFields.getString("Director");
 
-                    if (writerField.toLowerCase().contains(searchString)) {
-                        //split multiple writers
-                        List<String> writers = new ArrayList<String>();
-                        writerField = writerField.replaceAll("'", "''");
-                        while (writerField.contains(",")) {
-
+                    if (directorField.toLowerCase().contains(searchString)) {
+                        //split multiple directors
+                        List<String> directors = new ArrayList<String>();
+                        directorField = directorField.replaceAll("'", "''");
+                        while (directorField.contains(",")) {
                             //get last name in field
-                            int lastWriterIndex = writerField.lastIndexOf(',');
-                            String writer = writerField.substring(lastWriterIndex+2);
+                            int lastDirectorIndex = directorField.lastIndexOf(',');
+                            String director = directorField.substring(lastDirectorIndex+2);
+                            directorField = directorField.substring(0,lastDirectorIndex);
 
-                            //strip writer role from name
-                            if (writer.contains("(") && writer.contains(")")) {
-                                int roleStartIndex = writer.indexOf("(");
-                                writer = writer.substring(0,roleStartIndex);
-                                //System.out.println(writer);
-                            }
-
-                            writerField = writerField.substring(0,lastWriterIndex);
-
-                            writers.add(writer);
+                            directors.add(director);
                         }
-                        writers.add(writerField);
+                        directors.add(directorField);
 
-                        for (String writer : writers) {
-                            if (writer.toLowerCase().contains(searchString)) {
+                        for (String director : directors) {
+                            if (director.toLowerCase().contains(searchString)) {
                                 boolean alreadyAdded = false;
                                 for (String result : queryResults) {
-                                    if (result.equals(writer)) {
+                                    if (result.equals(director)) {
                                         alreadyAdded = true;
                                     }
                                 }
                                 if (!alreadyAdded) {
-                                    queryResults.add(writer);
+                                    queryResults.add(director);
                                 }
                             }
                         }
@@ -260,6 +250,7 @@ public class Writer {
         }
     }
 
+    //show the search results by going back to the javafx thread and updating the components
     public void showSearchResults(final ObservableList<String> queryResults, final String searchString) {
         Platform.runLater(new Runnable() {
             @Override
@@ -270,11 +261,10 @@ public class Writer {
                     searchBox.setItems(queryResults);
                     searchBox.show();
                 } else {
-                    errorComponent.setText("No writers found for: '" + searchString + "'. Please try again");
+                    errorComponent.setText("No directors found for: '" + searchString + "'. Please try again");
                 }
             }
         });
 
     }
-
 }

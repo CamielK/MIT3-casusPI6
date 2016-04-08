@@ -27,8 +27,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import mit3prototype.data.JarReader;
 
+import mit3prototype.data.RatingCalcDbReader;
 import org.relique.jdbc.csv.CsvDriver;
 
 /**
@@ -195,7 +195,7 @@ public class Cast {
                     if (path.startsWith("file:")) {
                         path = path.substring("file:".length());
                     }
-                    conn = DriverManager.getConnection("jdbc:relique:csv:class:" + JarReader.class.getName());
+                    conn = DriverManager.getConnection("jdbc:relique:csv:class:" + RatingCalcDbReader.class.getName());
                 }
                 
                 //ide data connection
