@@ -28,8 +28,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import mit3prototype.data.RatingCalcDbReader;
-import org.relique.jdbc.csv.CsvDriver;
+import mit3prototype.data.dataReaders.RatingCalcDbReader;
 
 /**
  * Created by Camiel on 06-Apr-16.
@@ -187,19 +186,18 @@ public class Writer {
                 
                 //configure database connection
                 Connection conn = null;
-                String path = this.getClass().getResource("/mit3prototype/data").toExternalForm();
+               
+                //get execution path to detect jar execution
+                String executionPath = this.getClass().getResource("/mit3prototype/data/mainDatabase.csv").toExternalForm();
                 
                 //jar data connection
-                if (path.startsWith("jar:")) {
-                    path = path.substring("jar:".length());
-                    if (path.startsWith("file:")) {
-                        path = path.substring("file:".length());
-                    }
+                if (executionPath.startsWith("jar:")) {
                     conn = DriverManager.getConnection("jdbc:relique:csv:class:" + RatingCalcDbReader.class.getName());
                 }
                 
                 //ide data connection
-                else if (path.startsWith("file:")) {
+                else if (executionPath.startsWith("file:")) {
+                    String path = this.getClass().getResource("/mit3prototype/data").toExternalForm();
                     path = path.substring("file:".length());
                     conn = DriverManager.getConnection("jdbc:relique:csv:" + path);
                 }

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import mit3prototype.data.RatingCalcDbReader;
+import mit3prototype.data.dataReaders.RatingCalcDbReader;
 
 /**
  * Created by Camiel on 07-Apr-16.
@@ -21,25 +21,26 @@ public class AverageRating {
         //establish static connection for all threads
         try {
             //load driver
-            Class.forName("org.relique.jdbc.csv.CsvDriver");
-
-            //configure database connection
-            String path = this.getClass().getResource("/mit3prototype/data").toExternalForm();
-
-            //jar data connection
-            if (path.startsWith("jar:")) {
-                path = path.substring("jar:".length());
-                if (path.startsWith("file:")) {
-                    path = path.substring("file:".length());
+                Class.forName("org.relique.jdbc.csv.CsvDriver");
+                
+                //configure database connection
+                conn = null;
+               
+                //get execution path to detect jar execution
+                String executionPath = this.getClass().getResource("/mit3prototype/data/mainDatabase.csv").toExternalForm();
+                
+                //jar data connection
+                if (executionPath.startsWith("jar:")) {
+                    conn = DriverManager.getConnection("jdbc:relique:csv:class:" + RatingCalcDbReader.class.getName());
                 }
-                conn = DriverManager.getConnection("jdbc:relique:csv:class:" + RatingCalcDbReader.class.getName());
-            }
-
-            //ide data connection
-            else if (path.startsWith("file:")) {
-                path = path.substring("file:".length());
-                conn = DriverManager.getConnection("jdbc:relique:csv:" + path);
-            }
+                
+                //ide data connection
+                else if (executionPath.startsWith("file:")) {
+                    String path = this.getClass().getResource("/mit3prototype/data").toExternalForm();
+                    path = path.substring("file:".length());
+                    conn = DriverManager.getConnection("jdbc:relique:csv:" + path);
+                }
+            
         } catch (Exception e) {e.printStackTrace();}
 
     }
