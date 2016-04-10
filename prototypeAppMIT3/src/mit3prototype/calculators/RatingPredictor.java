@@ -46,6 +46,13 @@ public class RatingPredictor {
 
         //create data input lists
         this.inputData = inputData;
+
+
+        for (String data : inputData) {
+
+            System.out.println("input data: " + data);
+        }
+
         generateMlrData();
 
 
@@ -55,6 +62,8 @@ public class RatingPredictor {
             if (MLRdata.get(i)!=null) {
                 usedPredictorCount++;
             }
+
+            System.out.println("MLR index: " + i + ".  data at index: " + MLRdata.get(i));
         }
 
 
@@ -132,11 +141,20 @@ public class RatingPredictor {
             double predictor = 0;
 
             //find next MLRdata row that is not null
-            for (int k = j; k < usedPredictorCount; k++) {
-                if (MLRdata.get(k)!=null) {predictor = MLRdata.get(k); break; }
+            int foundRows = 0;
+            int test = 0;
+            for (int k = 0; k < MLRdata.size(); k++) {
+                if (MLRdata.get(k)!=null && foundRows==j-1) {
+                    predictor = MLRdata.get(k);
+                    test = k;
+                    break;
+                } else if(MLRdata.get(k)!=null) {foundRows++;}
             }
 
-            predictedRating += beta.getValueAt(j, 0) * predictor;
+            System.out.println("MLR index:" +test+ ".  predictor value: " + predictor);
+            predictedRatingDouble += beta.getValueAt(j, 0) * predictor;
+
+            predictedRating = (float)predictedRatingDouble;
         }
 
         //return prediction result
@@ -168,9 +186,9 @@ public class RatingPredictor {
         if (!inputData.get(2).equals("Unused predictor")) {
             String mpaaRating = inputData.get(2);
             if (mpaaRating.equals("G (all ages)")) {MLRdata.set(8,Double.parseDouble("1"));} else {{MLRdata.set(8,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("PG (parental guidance advised)")) {MLRdata.set(9,Double.parseDouble("1"));} else {{MLRdata.set(9,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("PG-13 (13+)")) {MLRdata.set(10,Double.parseDouble("1"));} else {{MLRdata.set(10,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("NC-17 (17+)")) {MLRdata.set(11,Double.parseDouble("1"));} else {{MLRdata.set(11,Double.parseDouble("0"));}}
+            if (mpaaRating.equals("PG (parental guidance advised)")) {MLRdata.set(10,Double.parseDouble("1"));} else {{MLRdata.set(10,Double.parseDouble("0"));}}
+            if (mpaaRating.equals("PG-13 (13+)")) {MLRdata.set(11,Double.parseDouble("1"));} else {{MLRdata.set(11,Double.parseDouble("0"));}}
+            if (mpaaRating.equals("NC-17 (17+)")) {MLRdata.set(9,Double.parseDouble("1"));} else {{MLRdata.set(9,Double.parseDouble("0"));}}
             if (mpaaRating.equals("R (mature audiences)")) {MLRdata.set(12,Double.parseDouble("1"));} else {{MLRdata.set(12,Double.parseDouble("0"));}}
             if (mpaaRating.equals("UNRATED (no rating)")) {MLRdata.set(13,Double.parseDouble("1"));} else {{MLRdata.set(13,Double.parseDouble("0"));}}
         } else {MLRdata.set(8,null);MLRdata.set(9,null);MLRdata.set(10,null);MLRdata.set(11,null);MLRdata.set(12,null);MLRdata.set(13,null);}
@@ -260,6 +278,11 @@ public class RatingPredictor {
     private Matrix getBetas(double[][] predictorData, double[][] outputData) throws Exception {
         final MultiLinear ml = new MultiLinear(new Matrix(predictorData), new Matrix(outputData));
         final Matrix beta = ml.calculate();
+
+        for (int i =0; i < beta.getNrows(); i++) {
+            System.out.println(beta.getValueAt(i,0));
+        }
+
 
 //        //print betas
 //        System.out.println( "Intercept: " + beta.getValueAt(0, 0));

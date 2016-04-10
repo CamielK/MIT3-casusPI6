@@ -286,7 +286,7 @@ public class GUIcontroller implements Initializable {
             errorMessages.add("Invalid MPAA rating. please select an MPAA rating or uncheck this predictor.");
         }
         else if (mpaaCbx.isSelected()) {
-            inputData.add(mpaaInput.getSelectionModel().selectedItemProperty().toString());
+            inputData.add(mpaaInput.getSelectionModel().selectedItemProperty().getValue());
         } else { inputData.add("Unused predictor"); }
 
         //check budget

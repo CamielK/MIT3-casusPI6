@@ -18,7 +18,6 @@ import java.util.Vector;
 public class MainDbReader implements TableReader {
 
     public Reader getReader(Statement statement, String tableName) throws SQLException {
-        //TODO add maindatabase to project
         try {
             URL path = new URL(this.getClass().getResource("/mit3prototype/data/mainDatabase.csv").toExternalForm());
             JarURLConnection connection = (JarURLConnection) path.openConnection();
@@ -36,7 +35,6 @@ public class MainDbReader implements TableReader {
 
     public List getTableNames(Connection connection) {
         // Return list of available table names
-        //TODO set correct column names
         Vector v = new Vector();
 
         v.add("imdbID");
