@@ -7,6 +7,7 @@ JavaFX-Application-Class: mit3prototype.MainStart
 JavaFX-Class-Path: 
 Created-By: JavaFX Packager
 Main-Class: com/javafx/main/Main
+SplashScreen-Image: resources/splashScreen.png
 
 Name: mit3prototype/inputControllers/Continent$1.class
 SHA-256-Digest: +gU8CWtLp29vY6xn8+Uase2HfVBlLRwsCM8F1kPQgQ8=

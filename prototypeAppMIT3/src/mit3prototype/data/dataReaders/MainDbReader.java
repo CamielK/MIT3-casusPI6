@@ -41,55 +41,55 @@ public class MainDbReader implements TableReader {
 
         v.add("imdbID");
         v.add("Title");
-        v.add("YearsSinceRelease");
-        v.add("Runtime");
-        v.add("AvgDirectorRating");
-        v.add("AvgWriterRating");
-        v.add("AvgCastRating");
-        v.add("imdbRating");
+        v.add("YearsSinceRelease"); //0
+        v.add("Runtime"); //1
+        v.add("AvgDirectorRating"); //2
+        v.add("AvgWriterRating"); //3
+        v.add("AvgCastRating"); //4
+        v.add("imdbRating"); //5
         v.add("Budget");
         v.add("Revenue");
-        v.add("budget_norm_E8");
-        v.add("revenue_norm_E8");
-        v.add("mpaaRating_G");
-        v.add("mpaaRating_NC-17");
-        v.add("mpaaRating_PG");
-        v.add("mpaaRating_PG-13");
-        v.add("mpaaRating_R");
-        v.add("mpaaRating_UNRATED");
-        v.add("Genre_Action");
-        v.add("Genre_Adventure");
-        v.add("Genre_Animation");
-        v.add("Genre_Comedy");
-        v.add("Genre_Biography");
-        v.add("Genre_Crime");
-        v.add("Genre_Drama");
-        v.add("Genre_Documentary");
-        v.add("Genre_Family");
-        v.add("Genre_Fantasy");
-        v.add("Genre_History");
-        v.add("Genre_Horror");
-        v.add("Genre_Mystery");
-        v.add("Genre_Romance");
-        v.add("Genre_Sci-Fi");
-        v.add("Genre_Thriller");
-        v.add("Genre_Western");
-        v.add("Genre_Sport");
-        v.add("Genre_Music");
-        v.add("Genre_Musical");
-        v.add("Genre_War");
-        v.add("Language_English");
-        v.add("Language_Spanish");
-        v.add("Language_European");
-        v.add("Language_Asian");
-        v.add("Language_Arabic");
-        v.add("Language_Other");
-        v.add("Countrys_English");
-        v.add("Countrys_Spanish");
-        v.add("Countrys_European");
-        v.add("Countrys_Asian");
-        v.add("Countrys_Arabic");
-        v.add("Countrys_Other");
+        v.add("budget_norm_E8"); //6
+        v.add("revenue_norm_E8"); //7
+        v.add("mpaaRating_G"); //8
+        v.add("mpaaRating_NC-17"); //9
+        v.add("mpaaRating_PG"); //10
+        v.add("mpaaRating_PG-13"); //11
+        v.add("mpaaRating_R"); //12
+        v.add("mpaaRating_UNRATED"); //13
+        v.add("Genre_Action"); //14
+        v.add("Genre_Adventure"); //15
+        v.add("Genre_Animation"); //16
+        v.add("Genre_Comedy"); //17
+        v.add("Genre_Biography"); //18
+        v.add("Genre_Crime"); //19
+        v.add("Genre_Drama"); //20
+        v.add("Genre_Documentary"); //21
+        v.add("Genre_Family"); //22
+        v.add("Genre_Fantasy"); //23
+        v.add("Genre_History"); //24
+        v.add("Genre_Horror"); //25
+        v.add("Genre_Mystery"); //26
+        v.add("Genre_Romance"); //27
+        v.add("Genre_Sci-Fi"); //28
+        v.add("Genre_Thriller"); //29
+        v.add("Genre_Western"); //30
+        v.add("Genre_Sport"); //31
+        v.add("Genre_Music"); //32
+        v.add("Genre_Musical"); //33
+        v.add("Genre_War"); //34
+        v.add("Language_English"); //35
+        v.add("Language_Spanish"); //36
+        v.add("Language_European"); //37
+        v.add("Language_Asian"); //38
+        v.add("Language_Arabic"); //39
+        v.add("Language_Other"); //40
+        v.add("Countrys_English"); //41
+        v.add("Countrys_Spanish"); //42
+        v.add("Countrys_European"); //43
+        v.add("Countrys_Asian"); //44
+        v.add("Countrys_Arabic"); //45
+        v.add("Countrys_Other"); //46
 
 
         return v;

@@ -75,7 +75,7 @@ public class GUIcontroller implements Initializable {
     private Writer writerController = new Writer();
     private Cast castController = new Cast();
     private AverageRating avgRatingCalculator = new AverageRating();
-    private RatingPredictor ratingCalculator = new RatingPredictor();
+    private RatingPredictor ratingPredictor = new RatingPredictor();
     private RevenuePredictor revenuePredictor = new RevenuePredictor();
 
     // >>> output components <<<
@@ -239,7 +239,7 @@ public class GUIcontroller implements Initializable {
 
     // >>> submit button action <<<
     //checks if there are no invalid form entries and starts the calculation if there are no errors.
-    @FXML protected void submitForm(ActionEvent event) {
+    @FXML protected void submitForm(ActionEvent event) throws Exception {
 
         //reset label colors due to previous submits
         setOutputComponentsVisible(false);
@@ -259,7 +259,7 @@ public class GUIcontroller implements Initializable {
         //makes a list of all error messages that should be displayed
         List<String> errorMessages = new ArrayList<String>();
 
-        //add input data to a list. if input is disabled "Unused predictor" is added to this list. format: (releaseYear, mpaaRating, runtime, budget, genre, driector, writer, cast, language, country)
+        //add input data to a list. if input is disabled "Unused predictor" is added to this list. format: (releaseYear, runtime, mpaaRating, budget, genre, director, writer, cast, language, country)
         List<String> inputData = new ArrayList<>();
 
         // >>> check form input <<<
@@ -388,63 +388,66 @@ public class GUIcontroller implements Initializable {
                 if (error.contains("language")) { languageLbl.setStyle("-fx-text-fill: FIREBRICK;"); }
                 if (error.contains("country")) { countryLbl.setStyle("-fx-text-fill: FIREBRICK;"); }
             }
-            Text errorComponent = new Text(errorText);
-            errorComponent.setStyle("-fx-fill: FIREBRICK; -fx-font-weight: bold; -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );");
 
-            //button to close dialog
-            final Button okay = new Button("Okay, got it");
-            okay.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    Stage stage = (Stage) okay.getScene().getWindow();
-                    stage.close();
-                }
-            });
+            //show error dialog
+            new ErrorDialog(errorText, (Stage) submitBtn.getScene().getWindow());
 
-            //create and show new dialog with error messages
-            Stage dialogStage = new Stage();
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner((Stage) submitBtn.getScene().getWindow()); //set focus on dialog
-            dialogStage.setScene(new Scene(VBoxBuilder.create().
-                    children(errorComponent, okay).
-                    alignment(Pos.CENTER).padding(new Insets(5)).build()));
-            dialogStage.showAndWait();
         }
         else {
+            setOutputComponentsVisible(true);
 
             //call calculators to get output values
+            //average director rating
             progressStatus.setText("Calculating average director rating..");
             progress.setProgress(0.1);
-            float avgDirectorRating = avgRatingCalculator.getAvgRating(directorCombo.getItems(), "director");
+            String averageDirector = "Unused predictor";
+            if(!inputData.get(7).equals("Unused predictor")) {
+                float avgDirectorRating = avgRatingCalculator.getAvgRating(directorCombo.getItems(), "director");
+                inputData.set(5, String.format("%.1f", (avgDirectorRating)));
+                averageDirector = String.format("%.1f", (avgDirectorRating));
+            }
+            avgDirectorOutput.setText(averageDirector);
 
+
+            //average writer rating
             progressStatus.setText("Calculating average writer rating..");
             progress.setProgress(0.2);
-            float avgWriterRating = avgRatingCalculator.getAvgRating(writerCombo.getItems(), "writer");
+            String averageWriter = "Unused predictor";
+            if(!inputData.get(7).equals("Unused predictor")) {
+                float avgWriterRating = avgRatingCalculator.getAvgRating(writerCombo.getItems(), "writer");
+                inputData.set(6, String.format("%.1f", (avgWriterRating)));
+                averageWriter = String.format("%.1f", (avgWriterRating));
+            }
+            avgWriterOutput.setText(averageWriter);
 
+            //average cast rating
             progressStatus.setText("Calculating average cast rating..");
             progress.setProgress(0.3);
-            float avgCastRating = avgRatingCalculator.getAvgRating(castCombo.getItems(), "cast");
+            String averageCast = "Unused predictor";
+            if(!inputData.get(7).equals("Unused predictor")){
+                float avgCastRating = avgRatingCalculator.getAvgRating(castCombo.getItems(), "cast");
+                inputData.set(7, String.format("%.1f", (avgCastRating)));
+                averageCast = String.format("%.1f", (avgCastRating));
+            }
+            avgCastOutput.setText(averageCast);
+
 
             //call multiple linear regression method to get predicted imdb rating
             progressStatus.setText("Executing multiple linear regression for imdb rating");
             progress.setProgress(0.5);
-//            float predictedImdbRating = ratingPredictor.getPredictedRating(MLRData);
+            float predictedImdbRating = ratingPredictor.getPredictedRating(inputData);
+            ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
 
             //call multiple linear regression method to get predicted revenue
             progressStatus.setText("Executing multiple linear regression for revenue");
             progress.setProgress(0.75);
-//            float predictedRevenue = revenuePredictor.getPredictedRevenue(MLRData);
+            //float predictedRevenue = revenuePredictor.getPredictedRevenue(MLRData);
+            //revenueOutput.setText(String.format("%.1f", (predictedRevenue)));
 
 
-            //show output
+            //finish
             progressStatus.setText("Done.");
             progress.setProgress(1.0);
-            avgDirectorOutput.setText(String.format("%.1f", (avgDirectorRating)));
-            avgWriterOutput.setText(String.format("%.1f", (avgWriterRating)));
-            avgCastOutput.setText(String.format("%.1f", (avgCastRating)));
-//            ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
-//            revenueOutput.setText(String.format("%.1f", (predictedRevenue)));
-            setOutputComponentsVisible(true);
 
         }
     }
