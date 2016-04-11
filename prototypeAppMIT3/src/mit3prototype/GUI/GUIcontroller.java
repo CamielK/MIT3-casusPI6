@@ -1,6 +1,8 @@
 package mit3prototype.GUI;
 
+import javafx.application.Platform;
 import mit3prototype.calculators.AverageRating;
+import mit3prototype.calculators.PredictedRating;
 import mit3prototype.calculators.RatingPredictor;
 import mit3prototype.calculators.RevenuePredictor;
 import mit3prototype.inputControllers.*;
@@ -26,66 +28,66 @@ import java.util.List;
 public class GUIcontroller implements Initializable {
 
     //main grid
-    @FXML private GridPane grid;
+    @FXML private static GridPane grid;
 
     // >>> checkbox components <<<
-    @FXML private CheckBox releaseCbx;
-    @FXML private CheckBox runtimeCbx;
-    @FXML private CheckBox mpaaCbx;
-    @FXML private CheckBox budgetCbx;
-    @FXML private CheckBox genreCbx;
-    @FXML private CheckBox directorCbx;
-    @FXML private CheckBox writerCbx;
-    @FXML private CheckBox castCbx;
-    @FXML private CheckBox languageCbx;
-    @FXML private CheckBox countryCbx;
+    @FXML private static CheckBox releaseCbx;
+    @FXML private static CheckBox runtimeCbx;
+    @FXML private static CheckBox mpaaCbx;
+    @FXML private static CheckBox budgetCbx;
+    @FXML private static CheckBox genreCbx;
+    @FXML private static CheckBox directorCbx;
+    @FXML private static CheckBox writerCbx;
+    @FXML private static CheckBox castCbx;
+    @FXML private static CheckBox languageCbx;
+    @FXML private static CheckBox countryCbx;
 
     // >>> label components <<<
-    @FXML private Label releaseLbl;
-    @FXML private Label runtimeLbl;
-    @FXML private Label mpaaLbl;
-    @FXML private Label budgetLbl;
-    @FXML private Label genreLbl;
-    @FXML private Label directorLbl;
-    @FXML private Label writerLbl;
-    @FXML private Label castLbl;
-    @FXML private Label languageLbl;
-    @FXML private Label countryLbl;
+    @FXML private static Label releaseLbl;
+    @FXML private static Label runtimeLbl;
+    @FXML private static Label mpaaLbl;
+    @FXML private static Label budgetLbl;
+    @FXML private static Label genreLbl;
+    @FXML private static Label directorLbl;
+    @FXML private static Label writerLbl;
+    @FXML private static Label castLbl;
+    @FXML private static Label languageLbl;
+    @FXML private static Label countryLbl;
 
 
     // >>> input components <<<
-    @FXML private TextField releaseInput;
-    @FXML private TextField runtimeInput;
-    @FXML private ComboBox<String> mpaaInput;
-    @FXML private TextField budgetInput;
-    @FXML private ComboBox<String> genreCombo; @FXML private HBox genreBox;
-    @FXML private ComboBox<String> directorCombo; @FXML private HBox directorBox;
-    @FXML private ComboBox<String> writerCombo; @FXML private HBox writerBox;
-    @FXML private ComboBox<String> castCombo; @FXML private HBox castBox;
-    @FXML private ComboBox<String> languageCombo; @FXML private HBox languageBox;
-    @FXML private ComboBox<String> countryCombo; @FXML private HBox countryBox;
-    @FXML private Button submitBtn;
-    @FXML private Button helpBtn;
+    @FXML private static TextField releaseInput;
+    @FXML private static TextField runtimeInput;
+    @FXML private static ComboBox<String> mpaaInput;
+    @FXML private static TextField budgetInput;
+    @FXML private static ComboBox<String> genreCombo; @FXML private HBox genreBox;
+    @FXML private static ComboBox<String> directorCombo; @FXML private HBox directorBox;
+    @FXML private static ComboBox<String> writerCombo; @FXML private HBox writerBox;
+    @FXML private static ComboBox<String> castCombo; @FXML private HBox castBox;
+    @FXML private static ComboBox<String> languageCombo; @FXML private HBox languageBox;
+    @FXML private static ComboBox<String> countryCombo; @FXML private HBox countryBox;
+    @FXML private static Button submitBtn;
+    @FXML private static Button helpBtn;
 
     // >>> input controllers <<<
-    private Genre genreController = new Genre();
-    private RemoveDialog removeDialog = new RemoveDialog();
-    private Continent continentController = new Continent();
-    private Director directorController = new Director();
-    private Writer writerController = new Writer();
-    private Cast castController = new Cast();
-    private AverageRating avgRatingCalculator = new AverageRating();
-    private RatingPredictor ratingPredictor = new RatingPredictor();
-    private RevenuePredictor revenuePredictor = new RevenuePredictor();
+    private static Genre genreController = new Genre();
+    private static RemoveDialog removeDialog = new RemoveDialog();
+    private static Continent continentController = new Continent();
+    private static Director directorController = new Director();
+    private static Writer writerController = new Writer();
+    private static Cast castController = new Cast();
+    private static AverageRating avgRatingCalculator = new AverageRating();
+    private static RatingPredictor ratingPredictor = new RatingPredictor();
+    private static RevenuePredictor revenuePredictor = new RevenuePredictor();
 
     // >>> output components <<<
-    @FXML private ProgressBar progress;
-    @FXML private Label progressStatus;
-    @FXML private Label avgDirectorOutput;
-    @FXML private Label avgWriterOutput;
-    @FXML private Label avgCastOutput;
-    @FXML private Label ratingOutput;
-    @FXML private Label revenueOutput;
+    @FXML private static ProgressBar progress;
+    @FXML private static Label progressStatus;
+    @FXML private static Label avgDirectorOutput;
+    @FXML private static Label avgWriterOutput;
+    @FXML private static Label avgCastOutput;
+    @FXML private static Label ratingOutput;
+    @FXML private static Label revenueOutput;
 
 
     // init method is run when fxml is finished loading
@@ -261,6 +263,7 @@ public class GUIcontroller implements Initializable {
 
         //add input data to a list. if input is disabled "Unused predictor" is added to this list. format: (releaseYear, runtime, mpaaRating, budget, genre, director, writer, cast, language, country)
         List<String> inputData = new ArrayList<>();
+        List<Float> inputDataFloat = new ArrayList<>();
 
         // >>> check form input <<<
         //check release year input
@@ -401,9 +404,9 @@ public class GUIcontroller implements Initializable {
             progressStatus.setText("Calculating average director rating..");
             progress.setProgress(0.1);
             String averageDirector = "Unused predictor";
-            if(!inputData.get(7).equals("Unused predictor")) {
+            if(!inputData.get(5).equals("Unused predictor")) {
                 float avgDirectorRating = avgRatingCalculator.getAvgRating(directorCombo.getItems(), "director");
-                inputData.set(5, String.format("%.1f", (avgDirectorRating)));
+                inputDataFloat.add(avgDirectorRating);
                 averageDirector = String.format("%.1f", (avgDirectorRating));
             }
             avgDirectorOutput.setText(averageDirector);
@@ -413,9 +416,9 @@ public class GUIcontroller implements Initializable {
             progressStatus.setText("Calculating average writer rating..");
             progress.setProgress(0.2);
             String averageWriter = "Unused predictor";
-            if(!inputData.get(7).equals("Unused predictor")) {
+            if(!inputData.get(6).equals("Unused predictor")) {
                 float avgWriterRating = avgRatingCalculator.getAvgRating(writerCombo.getItems(), "writer");
-                inputData.set(6, String.format("%.1f", (avgWriterRating)));
+                inputDataFloat.add(avgWriterRating);
                 averageWriter = String.format("%.1f", (avgWriterRating));
             }
             avgWriterOutput.setText(averageWriter);
@@ -426,7 +429,7 @@ public class GUIcontroller implements Initializable {
             String averageCast = "Unused predictor";
             if(!inputData.get(7).equals("Unused predictor")){
                 float avgCastRating = avgRatingCalculator.getAvgRating(castCombo.getItems(), "cast");
-                inputData.set(7, String.format("%.1f", (avgCastRating)));
+                inputDataFloat.add(avgCastRating);
                 averageCast = String.format("%.1f", (avgCastRating));
             }
             avgCastOutput.setText(averageCast);
@@ -435,8 +438,10 @@ public class GUIcontroller implements Initializable {
             //call multiple linear regression method to get predicted imdb rating
             progressStatus.setText("Executing multiple linear regression for imdb rating");
             progress.setProgress(0.5);
-            float predictedImdbRating = ratingPredictor.getPredictedRating(inputData);
-            ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
+            new PredictedRating(inputData, inputDataFloat).start();
+
+           // float predictedImdbRating = ratingPredictor.getPredictedRating(inputData, inputDataFloat);
+            //ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
 
             //call multiple linear regression method to get predicted revenue
             progressStatus.setText("Executing multiple linear regression for revenue");
@@ -459,6 +464,17 @@ public class GUIcontroller implements Initializable {
         for (int i = componentsCount-11; i < componentsCount-1; i++) {
             grid.getChildren().get(i).setVisible(outputVisible);
         }
+
+    }
+
+
+    public void setPredictedRating(final float predictedImdbRating) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
+            }
+        });
 
     }
 

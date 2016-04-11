@@ -1,6 +1,7 @@
 package mit3prototype.calculators;
 
 import matrix.Matrix;
+import mit3prototype.GUI.GUIcontroller;
 import mit3prototype.data.dataReaders.MainDbReader;
 import mit3prototype.data.dataReaders.RatingCalcDbReader;
 import regression.MultiLinear;
@@ -26,6 +27,7 @@ public class RatingPredictor {
     //input data set
     //format: (releaseYear, runtime, mpaaRating, budget, genre, director, writer, cast, language, country) all are strings
     private static List<String> inputData = new ArrayList<>();
+    private static List<Float> inputDataFloat = new ArrayList<>(); //avgDirectorRating, avgWriterRating, avgCastRating
 
 
     //MLR data set (only numerical variables)
@@ -35,17 +37,18 @@ public class RatingPredictor {
 
     public RatingPredictor() {
         //init MLRdata list with 47 null columns
-        for (int i = 0; i <47; i++) {
+        for (int i = 0; i <=47; i++) {
             MLRdata.add(null);
         }
     }
 
     //calls MLR methods and returns the predicted imdbRating based on the given input data
-    public float getPredictedRating(List<String> inputData) throws Exception {
+    public float getPredictedRating(List<String> inputData, List<Float> inputDataFloat) throws Exception {
         float predictedRating = 0;
 
         //create data input lists
         this.inputData = inputData;
+        this.inputDataFloat = inputDataFloat;
 
 
         for (String data : inputData) {
@@ -58,7 +61,7 @@ public class RatingPredictor {
 
         //count used predictor variables
         int usedPredictorCount = 0;
-        for (int i = 0; i < 46; i++) {
+        for (int i = 0; i < 47; i++) {
             if (MLRdata.get(i)!=null) {
                 usedPredictorCount++;
             }
@@ -86,45 +89,45 @@ public class RatingPredictor {
             if (MLRdata.get(5)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("imdbRating")); f++; } //5
             if (MLRdata.get(6)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("budget_norm_E8")); f++; } //6
             if (MLRdata.get(7)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("revenue_norm_E8")); f++; } //7
-            if (MLRdata.get(8)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_G")); f++; } //8
-            if (MLRdata.get(9)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_NC-17")); f++; } //9
-            if (MLRdata.get(10)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_PG")); f++; } //10
-            if (MLRdata.get(11)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_PG-13")); f++; } //11
-            if (MLRdata.get(12)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_R")); f++; } //12
-            if (MLRdata.get(13)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_UNRATED")); f++; } //13
-            if (MLRdata.get(14)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Action")); f++; } //14
-            if (MLRdata.get(15)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Adventure")); f++; } //15
-            if (MLRdata.get(16)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Animation")); f++; } //16
-            if (MLRdata.get(17)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Comedy")); f++; } //17
-            if (MLRdata.get(18)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Biography")); f++; } //18
-            if (MLRdata.get(19)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Crime")); f++; } //19
-            if (MLRdata.get(20)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Drama")); f++; } //20
-            if (MLRdata.get(21)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Documentary")); f++; } //21
-            if (MLRdata.get(22)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Family")); f++; } //22
-            if (MLRdata.get(23)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Fantasy")); f++; } //23
-            if (MLRdata.get(24)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_History")); f++; } //24
-            if (MLRdata.get(25)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Horror")); f++; } //25
-            if (MLRdata.get(26)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Mystery")); f++; } //26
-            if (MLRdata.get(27)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Romance")); f++; } //27
-            if (MLRdata.get(28)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Sci-Fi")); f++; } //28
-            if (MLRdata.get(29)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Thriller")); f++; } //29
-            if (MLRdata.get(30)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Western")); f++; } //30
-            if (MLRdata.get(31)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Sport")); f++; } //31
-            if (MLRdata.get(32)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Music")); f++; } //32
-            if (MLRdata.get(33)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Musical")); f++; } //33
-            if (MLRdata.get(34)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_War")); f++; } //34
-            if (MLRdata.get(35)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_English")); f++; } //35
-            if (MLRdata.get(36)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Spanish")); f++; } //36
-            if (MLRdata.get(37)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_European")); f++; } //37
-            if (MLRdata.get(38)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Asian")); f++; } //38
-            if (MLRdata.get(39)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Arabic")); f++; } //39
-            if (MLRdata.get(40)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Other")); f++; } //40
-            if (MLRdata.get(41)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_English")); f++; } //41
-            if (MLRdata.get(42)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Spanish")); f++; } //42
-            if (MLRdata.get(43)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_European")); f++; } //43
-            if (MLRdata.get(44)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Asian")); f++; } //44
-            if (MLRdata.get(45)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Arabic")); f++; } //45
-            if (MLRdata.get(46)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Other")); f++; } //46
+            if (MLRdata.get(8)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_G")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //8
+            if (MLRdata.get(9)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_NC-17")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //9
+            if (MLRdata.get(10)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_PG")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //10
+            if (MLRdata.get(11)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_PG-13")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //11
+            if (MLRdata.get(12)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_R")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //12
+            if (MLRdata.get(13)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("mpaaRating_UNRATED")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //13
+            if (MLRdata.get(14)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Action")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //14
+            if (MLRdata.get(15)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Adventure")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //15
+            if (MLRdata.get(16)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Animation")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //16
+            if (MLRdata.get(17)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Comedy")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //17
+            if (MLRdata.get(18)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Biography")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //18
+            if (MLRdata.get(19)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Crime")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //19
+            if (MLRdata.get(20)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Drama")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //20
+            if (MLRdata.get(21)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Documentary")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //21
+            if (MLRdata.get(22)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Family")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //22
+            if (MLRdata.get(23)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Fantasy")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //23
+            if (MLRdata.get(24)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_History")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //24
+            if (MLRdata.get(25)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Horror")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //25
+            if (MLRdata.get(26)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Mystery")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //26
+            if (MLRdata.get(27)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Romance")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //27
+            if (MLRdata.get(28)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Sci-Fi")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //28
+            if (MLRdata.get(29)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Thriller")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //29
+            if (MLRdata.get(30)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Western")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //30
+            if (MLRdata.get(31)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Sport")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //31
+            if (MLRdata.get(32)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Music")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //32
+            if (MLRdata.get(33)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_Musical")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //33
+            if (MLRdata.get(34)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Genre_War")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //34
+            if (MLRdata.get(35)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_English")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //35
+            if (MLRdata.get(36)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Spanish")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //36
+            if (MLRdata.get(37)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_European")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //37
+            if (MLRdata.get(38)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Asian")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //38
+            if (MLRdata.get(39)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Arabic")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //39
+            if (MLRdata.get(40)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Language_Other")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //40
+            if (MLRdata.get(41)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_English")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //41
+            if (MLRdata.get(42)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Spanish")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //42
+            if (MLRdata.get(43)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_European")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //43
+            if (MLRdata.get(44)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Asian")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //44
+            if (MLRdata.get(45)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Arabic")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //45
+            if (MLRdata.get(46)!=null) {dataRow[f] = Double.parseDouble(trainingData.getString("Countrys_Other")); if (dataRow[f]==0) {dataRow[f] = Double.parseDouble("0.0001");} f++; } //46
 
 
             outputData[i] = new double[]{Double.parseDouble(trainingData.getString("imdbRating"))};
@@ -183,14 +186,14 @@ public class RatingPredictor {
         } else {MLRdata.set(1,null);}
 
         //check mpaa rating
-        if (!inputData.get(2).equals("Unused predictor")) {
+        if (!inputData.get(2).contains("Unused predictor")) {
             String mpaaRating = inputData.get(2);
-            if (mpaaRating.equals("G (all ages)")) {MLRdata.set(8,Double.parseDouble("1"));} else {{MLRdata.set(8,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("PG (parental guidance advised)")) {MLRdata.set(10,Double.parseDouble("1"));} else {{MLRdata.set(10,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("PG-13 (13+)")) {MLRdata.set(11,Double.parseDouble("1"));} else {{MLRdata.set(11,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("NC-17 (17+)")) {MLRdata.set(9,Double.parseDouble("1"));} else {{MLRdata.set(9,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("R (mature audiences)")) {MLRdata.set(12,Double.parseDouble("1"));} else {{MLRdata.set(12,Double.parseDouble("0"));}}
-            if (mpaaRating.equals("UNRATED (no rating)")) {MLRdata.set(13,Double.parseDouble("1"));} else {{MLRdata.set(13,Double.parseDouble("0"));}}
+            if (mpaaRating.contains("G (all ages)")) {MLRdata.set(8,Double.parseDouble("1"));} else {{MLRdata.set(8,Double.parseDouble("0.0001"));}}
+            if (mpaaRating.contains("PG (parental guidance advised)")) {MLRdata.set(10,Double.parseDouble("1"));} else {{MLRdata.set(10,Double.parseDouble("0.0001"));}}
+            if (mpaaRating.contains("PG-13 (13+)")) {MLRdata.set(11,Double.parseDouble("1"));} else {{MLRdata.set(11,Double.parseDouble("0.0001"));}}
+            if (mpaaRating.contains("NC-17 (17+)")) {MLRdata.set(9,Double.parseDouble("1"));} else {{MLRdata.set(9,Double.parseDouble("0.0001"));}}
+            if (mpaaRating.contains("R (mature audiences)")) {MLRdata.set(12,Double.parseDouble("1"));} else {{MLRdata.set(12,Double.parseDouble("0.0001"));}}
+            if (mpaaRating.contains("UNRATED (no rating)")) {MLRdata.set(13,Double.parseDouble("1"));} else {{MLRdata.set(13,Double.parseDouble("0.0001"));}}
         } else {MLRdata.set(8,null);MLRdata.set(9,null);MLRdata.set(10,null);MLRdata.set(11,null);MLRdata.set(12,null);MLRdata.set(13,null);}
 
         //check budget (normalized)
@@ -201,29 +204,29 @@ public class RatingPredictor {
         } else {MLRdata.set(6,null);}
 
         //check genre
-        if (!inputData.get(4).equals("Unused predictor")) {
+        if (!inputData.get(4).contains("Unused predictor")) {
             String genreField = inputData.get(4);
-            if (genreField.equals("Action")) {MLRdata.set(14,Double.parseDouble("1"));} else {{MLRdata.set(14,Double.parseDouble("0"));}}
-            if (genreField.equals("Adventure")) {MLRdata.set(15,Double.parseDouble("1"));} else {{MLRdata.set(15,Double.parseDouble("0"));}}
-            if (genreField.equals("Animation")) {MLRdata.set(16,Double.parseDouble("1"));} else {{MLRdata.set(16,Double.parseDouble("0"));}}
-            if (genreField.equals("Comedy")) {MLRdata.set(17,Double.parseDouble("1"));} else {{MLRdata.set(17,Double.parseDouble("0"));}}
-            if (genreField.equals("Biography")) {MLRdata.set(18,Double.parseDouble("1"));} else {{MLRdata.set(18,Double.parseDouble("0"));}}
-            if (genreField.equals("Crime")) {MLRdata.set(19,Double.parseDouble("1"));} else {{MLRdata.set(19,Double.parseDouble("0"));}}
-            if (genreField.equals("Drama")) {MLRdata.set(20,Double.parseDouble("1"));} else {{MLRdata.set(20,Double.parseDouble("0"));}}
-            if (genreField.equals("Documentary")) {MLRdata.set(21,Double.parseDouble("1"));} else {{MLRdata.set(21,Double.parseDouble("0"));}}
-            if (genreField.equals("Family")) {MLRdata.set(22,Double.parseDouble("1"));} else {{MLRdata.set(22,Double.parseDouble("0"));}}
-            if (genreField.equals("Fantasy")) {MLRdata.set(23,Double.parseDouble("1"));} else {{MLRdata.set(23,Double.parseDouble("0"));}}
-            if (genreField.equals("History")) {MLRdata.set(24,Double.parseDouble("1"));} else {{MLRdata.set(24,Double.parseDouble("0"));}}
-            if (genreField.equals("Horror")) {MLRdata.set(25,Double.parseDouble("1"));} else {{MLRdata.set(25,Double.parseDouble("0"));}}
-            if (genreField.equals("Mystery")) {MLRdata.set(26,Double.parseDouble("1"));} else {{MLRdata.set(26,Double.parseDouble("0"));}}
-            if (genreField.equals("Romance")) {MLRdata.set(27,Double.parseDouble("1"));} else {{MLRdata.set(27,Double.parseDouble("0"));}}
-            if (genreField.equals("Sci-Fi")) {MLRdata.set(28,Double.parseDouble("1"));} else {{MLRdata.set(28,Double.parseDouble("0"));}}
-            if (genreField.equals("Thriller")) {MLRdata.set(29,Double.parseDouble("1"));} else {{MLRdata.set(29,Double.parseDouble("0"));}}
-            if (genreField.equals("Western")) {MLRdata.set(30,Double.parseDouble("1"));} else {{MLRdata.set(30,Double.parseDouble("0"));}}
-            if (genreField.equals("Sport")) {MLRdata.set(31,Double.parseDouble("1"));} else {{MLRdata.set(31,Double.parseDouble("0"));}}
-            if (genreField.equals("Music")) {MLRdata.set(32,Double.parseDouble("1"));} else {{MLRdata.set(32,Double.parseDouble("0"));}}
-            if (genreField.equals("Musical")) {MLRdata.set(33,Double.parseDouble("1"));} else {{MLRdata.set(33,Double.parseDouble("0"));}}
-            if (genreField.equals("War")) {MLRdata.set(34,Double.parseDouble("1"));} else {{MLRdata.set(34,Double.parseDouble("0"));}}
+            if (genreField.contains("Action")) {MLRdata.set(14,Double.parseDouble("1"));} else {{MLRdata.set(14,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Adventure")) {MLRdata.set(15,Double.parseDouble("1"));} else {{MLRdata.set(15,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Animation")) {MLRdata.set(16,Double.parseDouble("1"));} else {{MLRdata.set(16,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Comedy")) {MLRdata.set(17,Double.parseDouble("1"));} else {{MLRdata.set(17,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Biography")) {MLRdata.set(18,Double.parseDouble("1"));} else {{MLRdata.set(18,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Crime")) {MLRdata.set(19,Double.parseDouble("1"));} else {{MLRdata.set(19,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Drama")) {MLRdata.set(20,Double.parseDouble("1"));} else {{MLRdata.set(20,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Documentary")) {MLRdata.set(21,Double.parseDouble("1"));} else {{MLRdata.set(21,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Family")) {MLRdata.set(22,Double.parseDouble("1"));} else {{MLRdata.set(22,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Fantasy")) {MLRdata.set(23,Double.parseDouble("1"));} else {{MLRdata.set(23,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("History")) {MLRdata.set(24,Double.parseDouble("1"));} else {{MLRdata.set(24,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Horror")) {MLRdata.set(25,Double.parseDouble("1"));} else {{MLRdata.set(25,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Mystery")) {MLRdata.set(26,Double.parseDouble("1"));} else {{MLRdata.set(26,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Romance")) {MLRdata.set(27,Double.parseDouble("1"));} else {{MLRdata.set(27,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Sci-Fi")) {MLRdata.set(28,Double.parseDouble("1"));} else {{MLRdata.set(28,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Thriller")) {MLRdata.set(29,Double.parseDouble("1"));} else {{MLRdata.set(29,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Western")) {MLRdata.set(30,Double.parseDouble("1"));} else {{MLRdata.set(30,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Sport")) {MLRdata.set(31,Double.parseDouble("1"));} else {{MLRdata.set(31,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Music")) {MLRdata.set(32,Double.parseDouble("1"));} else {{MLRdata.set(32,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("Musical")) {MLRdata.set(33,Double.parseDouble("1"));} else {{MLRdata.set(33,Double.parseDouble("0.0001"));}}
+            if (genreField.contains("War")) {MLRdata.set(34,Double.parseDouble("1"));} else {{MLRdata.set(34,Double.parseDouble("0.0001"));}}
         } else {MLRdata.set(14,null);MLRdata.set(15,null);MLRdata.set(16,null);MLRdata.set(17,null);MLRdata.set(18,null);MLRdata.set(19,null);
             MLRdata.set(20,null);MLRdata.set(21,null);MLRdata.set(22,null);MLRdata.set(23,null);MLRdata.set(24,null);MLRdata.set(25,null);
             MLRdata.set(26,null);MLRdata.set(27,null);MLRdata.set(28,null);MLRdata.set(29,null);MLRdata.set(30,null);MLRdata.set(31,null);
@@ -231,44 +234,44 @@ public class RatingPredictor {
 
         //check director
         if (!inputData.get(5).equals("Unused predictor")) {
-            double avgDirectorRating = Float.parseFloat(inputData.get(5));
-            MLRdata.set(2,avgDirectorRating);
+            double averageDirectorRating = inputDataFloat.get(0);
+            MLRdata.set(2,averageDirectorRating);
         } else {MLRdata.set(2,null);}
 
         //check writer
         if (!inputData.get(6).equals("Unused predictor")) {
-            double avgDirectorRating = Float.parseFloat(inputData.get(6));
-            MLRdata.set(3,avgDirectorRating);
+            double averageWriterRating = inputDataFloat.get(1);
+            MLRdata.set(3,averageWriterRating);
         } else {MLRdata.set(3,null);}
 
         //check cast
         if (!inputData.get(7).equals("Unused predictor")) {
-            double avgDirectorRating = Float.parseFloat(inputData.get(7));
-            MLRdata.set(4,avgDirectorRating);
+            double averageCastRating = inputDataFloat.get(2);
+            MLRdata.set(4,averageCastRating);
         } else {MLRdata.set(4,null);}
 
-
         //check language
-        if (!inputData.get(8).equals("Unused predictor")) {
+        if (!inputData.get(8).contains("Unused predictor")) {
             String languages = inputData.get(8);
-            if (languages.equals("English")) {MLRdata.set(35,Double.parseDouble("1"));} else {{MLRdata.set(35,Double.parseDouble("0"));}}
-            if (languages.equals("Spanish")) {MLRdata.set(36,Double.parseDouble("1"));} else {{MLRdata.set(36,Double.parseDouble("0"));}}
-            if (languages.equals("European")) {MLRdata.set(37,Double.parseDouble("1"));} else {{MLRdata.set(37,Double.parseDouble("0"));}}
-            if (languages.equals("Arabic")) {MLRdata.set(38,Double.parseDouble("1"));} else {{MLRdata.set(38,Double.parseDouble("0"));}}
-            if (languages.equals("Asian")) {MLRdata.set(39,Double.parseDouble("1"));} else {{MLRdata.set(39,Double.parseDouble("0"));}}
-            if (languages.equals("Other")) {MLRdata.set(40,Double.parseDouble("1"));} else {{MLRdata.set(40,Double.parseDouble("0"));}}
+            if (languages.contains("English")) {MLRdata.set(35,Double.parseDouble("1"));} else {{MLRdata.set(35,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Spanish")) {MLRdata.set(36,Double.parseDouble("1"));} else {{MLRdata.set(36,Double.parseDouble("0.0001"));}}
+            if (languages.contains("European")) {MLRdata.set(37,Double.parseDouble("1"));} else {{MLRdata.set(37,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Arabic")) {MLRdata.set(38,Double.parseDouble("1"));} else {{MLRdata.set(38,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Asian")) {MLRdata.set(39,Double.parseDouble("1"));} else {{MLRdata.set(39,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Other")) {MLRdata.set(40,Double.parseDouble("1"));} else {{MLRdata.set(40,Double.parseDouble("0.0001"));}}
         } else {MLRdata.set(35,null);MLRdata.set(36,null);MLRdata.set(37,null);MLRdata.set(38,null);MLRdata.set(39,null);MLRdata.set(40,null);}
 
         //check country
-        if (!inputData.get(9).equals("Unused predictor")) {
+        if (!inputData.get(9).contains("Unused predictor")) {
             String languages = inputData.get(9);
-            if (languages.equals("English")) {MLRdata.set(41,Double.parseDouble("1"));} else {{MLRdata.set(41,Double.parseDouble("0"));}}
-            if (languages.equals("Spanish")) {MLRdata.set(42,Double.parseDouble("1"));} else {{MLRdata.set(42,Double.parseDouble("0"));}}
-            if (languages.equals("European")) {MLRdata.set(43,Double.parseDouble("1"));} else {{MLRdata.set(43,Double.parseDouble("0"));}}
-            if (languages.equals("Arabic")) {MLRdata.set(44,Double.parseDouble("1"));} else {{MLRdata.set(44,Double.parseDouble("0"));}}
-            if (languages.equals("Asian")) {MLRdata.set(45,Double.parseDouble("1"));} else {{MLRdata.set(45,Double.parseDouble("0"));}}
-            if (languages.equals("Other")) {MLRdata.set(46,Double.parseDouble("1"));} else {{MLRdata.set(46,Double.parseDouble("0"));}}
+            if (languages.contains("English")) {MLRdata.set(41,Double.parseDouble("1"));} else {{MLRdata.set(41,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Spanish")) {MLRdata.set(42,Double.parseDouble("1"));} else {{MLRdata.set(42,Double.parseDouble("0.0001"));}}
+            if (languages.contains("European")) {MLRdata.set(43,Double.parseDouble("1"));} else {{MLRdata.set(43,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Arabic")) {MLRdata.set(44,Double.parseDouble("1"));} else {{MLRdata.set(44,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Asian")) {MLRdata.set(45,Double.parseDouble("1"));} else {{MLRdata.set(45,Double.parseDouble("0.0001"));}}
+            if (languages.contains("Other")) {MLRdata.set(46,Double.parseDouble("1"));} else {{MLRdata.set(46,Double.parseDouble("0.0001"));}}
         } else {MLRdata.set(41,null);MLRdata.set(42,null);MLRdata.set(43,null);MLRdata.set(44,null);MLRdata.set(45,null);MLRdata.set(46,null);}
+
 
     }
 
