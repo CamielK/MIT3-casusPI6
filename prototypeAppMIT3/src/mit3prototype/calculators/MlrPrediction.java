@@ -21,10 +21,10 @@ public class MlrPrediction extends Thread {
 
     //class variables
     private final int trainingDataRows = 3693; //rows in mainDatabase.csv
-    private GUIcontroller guiController = new GUIcontroller();
     private boolean useIntercept;
     private String outputVar; //the variable to be predicted. can be either 'rating' or 'revenue'
     private String[][] detailsArray; //used to save calculation results
+    private GUIcontroller guiController;
 
     //input data set
     //format: (releaseYear, runtime, mpaaRating, budget, genre, director, writer, cast, language, country) all are strings
@@ -38,11 +38,12 @@ public class MlrPrediction extends Thread {
     private List<Double> MLRdata = new ArrayList<>();
 
     //constructor
-    public MlrPrediction(List<String> inputData, List<Float> inputDataFloat, boolean useIntercept, String outputVar) {
+    public MlrPrediction(List<String> inputData, List<Float> inputDataFloat, boolean useIntercept, String outputVar, GUIcontroller gui) {
         this.inputData = inputData;
         this.inputDataFloat = inputDataFloat;
         this.useIntercept = useIntercept;
         this.outputVar = outputVar;
+        this.guiController = gui;
 
         //init MLRdata list with 47 null columns
         for (int i = 0; i < 47; i++) {

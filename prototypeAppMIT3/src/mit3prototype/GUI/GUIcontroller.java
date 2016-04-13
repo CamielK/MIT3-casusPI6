@@ -26,64 +26,64 @@ public class GUIcontroller implements Initializable {
     private static String[][] revenueDetailsArray;
 
     //main grid
-    @FXML private static GridPane grid;
+    @FXML private GridPane grid;
 
     // >>> checkbox components <<<
-    @FXML private static CheckBox releaseCbx;
-    @FXML private static CheckBox runtimeCbx;
-    @FXML private static CheckBox mpaaCbx;
-    @FXML private static CheckBox budgetCbx;
-    @FXML private static CheckBox genreCbx;
-    @FXML private static CheckBox directorCbx;
-    @FXML private static CheckBox writerCbx;
-    @FXML private static CheckBox castCbx;
-    @FXML private static CheckBox languageCbx;
-    @FXML private static CheckBox countryCbx;
+    @FXML private CheckBox releaseCbx;
+    @FXML private CheckBox runtimeCbx;
+    @FXML private CheckBox mpaaCbx;
+    @FXML private CheckBox budgetCbx;
+    @FXML private CheckBox genreCbx;
+    @FXML private CheckBox directorCbx;
+    @FXML private CheckBox writerCbx;
+    @FXML private CheckBox castCbx;
+    @FXML private CheckBox languageCbx;
+    @FXML private CheckBox countryCbx;
 
     // >>> label components <<<
-    @FXML private static Label releaseLbl;
-    @FXML private static Label runtimeLbl;
-    @FXML private static Label mpaaLbl;
-    @FXML private static Label budgetLbl;
-    @FXML private static Label genreLbl;
-    @FXML private static Label directorLbl;
-    @FXML private static Label writerLbl;
-    @FXML private static Label castLbl;
-    @FXML private static Label languageLbl;
-    @FXML private static Label countryLbl;
+    @FXML private Label releaseLbl;
+    @FXML private Label runtimeLbl;
+    @FXML private Label mpaaLbl;
+    @FXML private Label budgetLbl;
+    @FXML private Label genreLbl;
+    @FXML private Label directorLbl;
+    @FXML private Label writerLbl;
+    @FXML private Label castLbl;
+    @FXML private Label languageLbl;
+    @FXML private Label countryLbl;
 
 
     // >>> input components <<<
-    @FXML private static TextField releaseInput;
-    @FXML private static TextField runtimeInput;
-    @FXML private static ComboBox<String> mpaaInput;
-    @FXML private static TextField budgetInput;
-    @FXML private static ComboBox<String> genreCombo; @FXML private HBox genreBox;
-    @FXML private static ComboBox<String> directorCombo; @FXML private HBox directorBox;
-    @FXML private static ComboBox<String> writerCombo; @FXML private HBox writerBox;
-    @FXML private static ComboBox<String> castCombo; @FXML private HBox castBox;
-    @FXML private static ComboBox<String> languageCombo; @FXML private HBox languageBox;
-    @FXML private static ComboBox<String> countryCombo; @FXML private HBox countryBox;
-    @FXML private static Button submitBtn;
-    @FXML private static Button helpBtn;
+    @FXML private TextField releaseInput;
+    @FXML private TextField runtimeInput;
+    @FXML private ComboBox<String> mpaaInput;
+    @FXML private TextField budgetInput;
+    @FXML private ComboBox<String> genreCombo; @FXML private HBox genreBox;
+    @FXML private ComboBox<String> directorCombo; @FXML private HBox directorBox;
+    @FXML private ComboBox<String> writerCombo; @FXML private HBox writerBox;
+    @FXML private ComboBox<String> castCombo; @FXML private HBox castBox;
+    @FXML private ComboBox<String> languageCombo; @FXML private HBox languageBox;
+    @FXML private ComboBox<String> countryCombo; @FXML private HBox countryBox;
+    @FXML private Button submitBtn;
+    @FXML private Button helpBtn;
 
     // >>> input controllers <<<
-    private static Genre genreController = new Genre();
-    private static RemoveDialog removeDialog = new RemoveDialog();
-    private static Continent continentController = new Continent();
-    private static Director directorController = new Director();
-    private static Writer writerController = new Writer();
-    private static Cast castController = new Cast();
-    private static AverageRating avgRatingCalculator = new AverageRating();
+    private Genre genreController = new Genre();
+    private RemoveDialog removeDialog = new RemoveDialog();
+    private Continent continentController = new Continent();
+    private Director directorController = new Director();
+    private Writer writerController = new Writer();
+    private Cast castController = new Cast();
+    private AverageRating avgRatingCalculator = new AverageRating();
 
     // >>> output components <<<
-    @FXML private static Text progressStatus;
-    @FXML private static ProgressIndicator progressIndicator;
-    @FXML private static Label avgDirectorOutput;
-    @FXML private static Label avgWriterOutput;
-    @FXML private static Label avgCastOutput;
-    @FXML private static Text ratingOutput;
-    @FXML private static Text revenueOutput;
+    @FXML private Text progressStatus;
+    @FXML private ProgressIndicator progressIndicator;
+    @FXML private Label avgDirectorOutput;
+    @FXML private Label avgWriterOutput;
+    @FXML private Label avgCastOutput;
+    @FXML private Text ratingOutput;
+    @FXML private Text revenueOutput;
 
 
     // init method is run when fxml is finished loading
@@ -445,10 +445,10 @@ public class GUIcontroller implements Initializable {
 
             //call multiple linear regression method to get predicted imdb rating
             progressStatus.setText("Predicting imdb rating..");
-            new MlrPrediction(inputData, inputDataFloat, true, "rating").start();
+            new MlrPrediction(inputData, inputDataFloat, true, "rating", this).start();
 
             //call multiple linear regression method to get predicted revenue
-            new MlrPrediction(inputData, inputDataFloat, true, "revenue").start();
+            new MlrPrediction(inputData, inputDataFloat, true, "revenue", this).start();
 
         }
     }
