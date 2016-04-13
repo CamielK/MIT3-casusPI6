@@ -162,20 +162,24 @@
         </HBox>
 
         <!--    right output components     -->
+        <ProgressIndicator id="prediction-output" fx:id="progressIndicator" GridPane.columnIndex="6" GridPane.rowIndex="6" GridPane.columnSpan="2" GridPane.rowSpan="2" visible="false"/>
+
         <Text id="intro-text" text="Calculation results:" GridPane.columnIndex="5" GridPane.rowIndex="3" GridPane.columnSpan="2" />
         <Label text="Calculation progress: " GridPane.columnIndex="5" GridPane.rowIndex="4" />
-        <ProgressBar fx:id="progress" prefWidth="150" GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.columnSpan="2" progress="0"/>
-        <Label fx:id="progressStatus" text="Awaiting input..." GridPane.columnIndex="6" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+        <!--<ProgressBar fx:id="progress" prefWidth="150" GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.columnSpan="2" progress="0"/>-->
+        <Text id="prediction-output" fx:id="progressStatus" text="Awaiting input..." GridPane.columnIndex="6" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
         <Label text="Average directors rating: " GridPane.columnIndex="5" GridPane.rowIndex="7" />
         <Label fx:id="avgDirectorOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="7" />
         <Label text="Average writers rating: " GridPane.columnIndex="5" GridPane.rowIndex="8" />
         <Label fx:id="avgWriterOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="8" />
         <Label text="Average cast rating: " GridPane.columnIndex="5" GridPane.rowIndex="9" />
         <Label fx:id="avgCastOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="9" />
-        <Label id="prediction-output" text="Predicted imdb rating: " GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.columnSpan="2"/>
-        <Label id="prediction-output" fx:id="ratingOutput" text="..." GridPane.columnIndex="7" GridPane.rowIndex="11" />
-        <Label id="prediction-output" text="Predicted revenue: " GridPane.columnIndex="5" GridPane.rowIndex="12" GridPane.columnSpan="2"/>
-        <Label id="prediction-output" fx:id="revenueOutput" text="..." GridPane.columnIndex="7" GridPane.rowIndex="12" />
+        <Text text="Predicted rating: " GridPane.columnIndex="5" GridPane.rowIndex="11" GridPane.columnSpan="2"/>
+        <Text id="prediction-output" fx:id="ratingOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="11" GridPane.columnSpan="2"/>
+        <Button fx:id="ratingDetails" onAction="#ratingDetails" text="Details" GridPane.columnIndex="7" GridPane.rowIndex="11"/>
+        <Text text="Predicted revenue: " GridPane.columnIndex="5" GridPane.rowIndex="12" GridPane.columnSpan="2"/>
+        <Text id="prediction-output" fx:id="revenueOutput" text="..." GridPane.columnIndex="6" GridPane.rowIndex="12" GridPane.columnSpan="2"/>
+        <Button fx:id="revenueDetails" onAction="#revenueDetails" text="Details" GridPane.columnIndex="7" GridPane.rowIndex="12"/>
         <Button fx:id="helpBtn" onAction="#help" text="Need help?" GridPane.columnIndex="6" GridPane.rowIndex="16"/>
 
 

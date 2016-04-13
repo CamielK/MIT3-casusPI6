@@ -61,6 +61,8 @@
 }
 
 #prediction-output {
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
+    -fx-fill: #2A5058;
+    -fx-font-family: "Calibri";
 }

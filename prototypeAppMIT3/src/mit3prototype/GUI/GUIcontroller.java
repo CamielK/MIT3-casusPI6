@@ -1,6 +1,10 @@
 package mit3prototype.GUI;
 
 import javafx.application.Platform;
+import javafx.scene.text.Text;
+import mit3prototype.Dialogs.HelpDialog;
+import mit3prototype.Dialogs.OutputDetailDialog;
+import mit3prototype.Dialogs.RemoveDialog;
 import mit3prototype.calculators.*;
 import mit3prototype.inputControllers.*;
 import javafx.event.ActionEvent;
@@ -16,6 +20,10 @@ import java.util.List;
 
 
 public class GUIcontroller implements Initializable {
+
+    //class variables
+    private static String[][] ratingDetailsArray;
+    private static String[][] revenueDetailsArray;
 
     //main grid
     @FXML private static GridPane grid;
@@ -69,13 +77,13 @@ public class GUIcontroller implements Initializable {
     private static AverageRating avgRatingCalculator = new AverageRating();
 
     // >>> output components <<<
-    @FXML private static ProgressBar progress;
-    @FXML private static Label progressStatus;
+    @FXML private static Text progressStatus;
+    @FXML private static ProgressIndicator progressIndicator;
     @FXML private static Label avgDirectorOutput;
     @FXML private static Label avgWriterOutput;
     @FXML private static Label avgCastOutput;
-    @FXML private static Label ratingOutput;
-    @FXML private static Label revenueOutput;
+    @FXML private static Text ratingOutput;
+    @FXML private static Text revenueOutput;
 
 
     // init method is run when fxml is finished loading
@@ -226,14 +234,21 @@ public class GUIcontroller implements Initializable {
     }
 
 
+    //Multiple linear regression output details buttons
+    @FXML protected void ratingDetails(ActionEvent event) {
+        if (ratingDetailsArray!=null) new OutputDetailDialog((Stage) helpBtn.getScene().getWindow(), ratingDetailsArray);
+    }
+    @FXML protected void revenueDetails(ActionEvent event) {
+        if (revenueDetailsArray!=null) new OutputDetailDialog((Stage) helpBtn.getScene().getWindow(), revenueDetailsArray);
+    }
+
 
     // >>> submit button action <<<
     //checks if there are no invalid form entries and starts the calculation if there are no errors.
     @FXML protected void submitForm(ActionEvent event) throws Exception {
 
-        //reset label colors due to previous submits
+        //reset label colors and other elements due to previous submits
         setOutputComponentsVisible(false);
-        progress.setProgress(0.0);
         progressStatus.setText("Awaiting input...");
         releaseLbl.setStyle("-fx-text-fill: #333333;");
         runtimeLbl.setStyle("-fx-text-fill: #333333;");
@@ -245,9 +260,15 @@ public class GUIcontroller implements Initializable {
         castLbl.setStyle("-fx-text-fill: #333333;");
         languageLbl.setStyle("-fx-text-fill: #333333;");
         countryLbl.setStyle("-fx-text-fill: #333333;");
+        ratingOutput.setText("...");
+        revenueOutput.setText("...");
+        avgDirectorOutput.setText("...");
+        avgWriterOutput.setText("...");
+        avgCastOutput.setText("...");
+
 
         //makes a list of all error messages that should be displayed
-        List<String> errorMessages = new ArrayList<String>();
+        List<String> errorMessages = new ArrayList<>();
 
         //add input data to a list. if input is disabled "Unused predictor" is added to this list. format: (releaseYear, runtime, mpaaRating, budget, genre, director, writer, cast, language, country)
         List<String> inputData = new ArrayList<>();
@@ -284,7 +305,7 @@ public class GUIcontroller implements Initializable {
         if (budgetCbx.isSelected()) {
             try {
                 long budget = Long.parseLong(budgetInput.getText());
-                if (budget < 0) { errorMessages.add("Invalid budget. Please enter a budget bigger then 0 or uncheck this predictor."); }
+                if (budget < 0 || budget > 1000000000) { errorMessages.add("Invalid budget. Please enter a budget between 0 and 1.000.000.000 or uncheck this predictor."); }
                 else { inputData.add(budgetInput.getText()); }
             } catch (Exception e) { errorMessages.add("Invalid budget. Please enter a budget using only integers."); }
         }  else { inputData.add("Unused predictor"); }
@@ -387,10 +408,11 @@ public class GUIcontroller implements Initializable {
         else {
             setOutputComponentsVisible(true);
 
+            progressIndicator.setVisible(true);
+
             //call calculators to get output values
             //average director rating
-            progressStatus.setText("Calculating average director rating..");
-            progress.setProgress(0.1);
+            progressStatus.setText("Calculating avg director rating..");
             String averageDirector = "Unused predictor";
             if(!inputData.get(5).equals("Unused predictor")) {
                 float avgDirectorRating = avgRatingCalculator.getAvgRating(directorCombo.getItems(), "director");
@@ -401,8 +423,7 @@ public class GUIcontroller implements Initializable {
 
 
             //average writer rating
-            progressStatus.setText("Calculating average writer rating..");
-            progress.setProgress(0.2);
+            progressStatus.setText("Calculating avg writer rating..");
             String averageWriter = "Unused predictor";
             if(!inputData.get(6).equals("Unused predictor")) {
                 float avgWriterRating = avgRatingCalculator.getAvgRating(writerCombo.getItems(), "writer");
@@ -412,8 +433,7 @@ public class GUIcontroller implements Initializable {
             avgWriterOutput.setText(averageWriter);
 
             //average cast rating
-            progressStatus.setText("Calculating average cast rating..");
-            progress.setProgress(0.3);
+            progressStatus.setText("Calculating avg cast rating..");
             String averageCast = "Unused predictor";
             if(!inputData.get(7).equals("Unused predictor")){
                 float avgCastRating = avgRatingCalculator.getAvgRating(castCombo.getItems(), "cast");
@@ -424,20 +444,11 @@ public class GUIcontroller implements Initializable {
 
 
             //call multiple linear regression method to get predicted imdb rating
-            progressStatus.setText("Executing multiple linear regression for imdb rating");
-            progress.setProgress(0.5);
-            new RatingPredictor(inputData, inputDataFloat, true).start();
+            progressStatus.setText("Predicting imdb rating..");
+            new MlrPrediction(inputData, inputDataFloat, true, "rating").start();
 
             //call multiple linear regression method to get predicted revenue
-            progressStatus.setText("Executing multiple linear regression for revenue");
-            progress.setProgress(0.75);
-            //float predictedRevenue = revenuePredictor.getPredictedRevenue(MLRData);
-            //revenueOutput.setText(String.format("%.1f", (predictedRevenue)));
-
-
-            //finish
-            progressStatus.setText("Done.");
-            progress.setProgress(1.0);
+            new MlrPrediction(inputData, inputDataFloat, true, "revenue").start();
 
         }
     }
@@ -446,21 +457,53 @@ public class GUIcontroller implements Initializable {
     //hides or shows the output components
     public void setOutputComponentsVisible(boolean outputVisible) {
         int componentsCount = grid.getChildren().size();
-        for (int i = componentsCount-11; i < componentsCount-1; i++) {
+        for (int i = componentsCount-13; i < componentsCount-1; i++) {
             grid.getChildren().get(i).setVisible(outputVisible);
         }
-
     }
 
-
+    //used by MLR method to return the predicted rating.
     public void setPredictedRating(final float predictedImdbRating) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
+
+                if (progressStatus.getText().contains("rating")) {
+                    progressStatus.setText("Predicting revenue..");
+                }
+                if (!revenueOutput.getText().contains("...")) {
+                    progressIndicator.setVisible(false);
+                    progressStatus.setText("Done.");
+                }
             }
         });
 
+    }
+
+    //used by MLR method to return the predicted revenue.
+    public void setPredictedRevenue(final float predictedRevenue) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                revenueOutput.setText(String.format("%.0f", (predictedRevenue*100000000)));
+
+                if (progressStatus.getText().contains("revenue")) {
+                    progressIndicator.setVisible(false);
+                    progressStatus.setText("Done.");
+                }
+            }
+        });
+
+    }
+
+    //fill the given output variables details array with the calculation details
+    public void setDetailsArray(String[][] detailsArray, String outputVar) {
+        if (outputVar.contains("rating")) {
+            this.ratingDetailsArray = detailsArray;
+        } else if (outputVar.contains("revenue")) {
+            this.revenueDetailsArray = detailsArray;
+        }
     }
 
 }

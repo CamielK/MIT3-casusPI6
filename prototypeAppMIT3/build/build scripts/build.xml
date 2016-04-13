@@ -73,6 +73,7 @@
           <fx:resources>
               <fx:fileset dir="${basedir}/${dist.dir}" includes="*.jar"/>
               <fx:fileset type="jar" dir="${basedir}/${dist.dir}/lib" includes="csvjdbc-1.0-29.jar"/>
+              <fx:fileset type="jar" dir="${basedir}/${dist.dir}/lib" includes="Jama-1.0.3.jar"/>
           </fx:resources>
           <fx:info title="${application.title}" 
                    vendor="${application.vendor}"/>
@@ -80,6 +81,7 @@
 		<jar id="files" jarfile="${basedir}/${dist.dir}/Mit3PrototypeNew.jar" manifest="${basedir}/MANIFEST.MF">
 			<zipfileset src="${basedir}/${dist.dir}/Mit3Prototype.jar" includes="**/*.java **/*.*"/>
 			<zipfileset src="${basedir}/${dist.dir}/lib/csvjdbc-1.0-29.jar" includes="**/*.java **/*.*"/>
+			<zipfileset src="${basedir}/${dist.dir}/lib/Jama-1.0.3.jar" includes="**/*.java **/*.*"/>
 		</jar>
      </target>
 	 

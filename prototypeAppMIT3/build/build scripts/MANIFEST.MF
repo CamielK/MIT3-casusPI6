@@ -466,4 +466,29 @@ SHA-256-Digest: FYFGPDJoBKrRQ8eLGdVkZJU9Uek8NEOO2dpCtyGc/kk=
 Name: org/relique/jdbc/csv/BinaryOperation.class
 SHA-256-Digest: dFntoAUHQiHm6BBCBJeYs0PtoJMtQNdEDd3rg2aFFwM=
 
+Name: Jama/test/TestMatrix.class
+SHA-256-Digest: wvXqO8wsoj2lZXZ2N7DDA1jjg61w87iN3PHU41iGxEw=
 
+Name: Jama/SingularValueDecomposition.class
+SHA-256-Digest: xOTd2kR2/GMG60NhUultDbFqI6njHsGFXzwUh0ZcxMo=
+
+Name: Jama/QRDecomposition.class
+SHA-256-Digest: YK/UJLqhCtegq7QmlSo4yyrGjoKPbgxcELaZAB7gdMY=
+
+Name: Jama/EigenvalueDecomposition.class
+SHA-256-Digest: Q2Usy81wZ6Xpl8AyqCkZbsGtdaugF26QgIgmElgUpDU=
+
+Name: Jama/CholeskyDecomposition.class
+SHA-256-Digest: J1GC6ny6Odl13ubbgg8nZ7xKrUo70CW9+jAOvelAm8Q=
+
+Name: Jama/util/Maths.class
+SHA-256-Digest: cRa0Ez73kVG5AHvhVai4W6RL8v6UrtyYk29cefLY46U=
+
+Name: Jama/examples/MagicSquareExample.class
+SHA-256-Digest: RbX95w0FHuZ4guNr8WryisqL6DL45I2PHza5Mz6tVWY=
+
+Name: Jama/Matrix.class
+SHA-256-Digest: m90E5kxrMvxo3+oXQvqtKFsgt54g1emmAVgWtI4ba7g=
+
+Name: Jama/LUDecomposition.class
+SHA-256-Digest: XuVYrCLoHip4ztAYQ/RuuQ3PlVdjmnfoulUzC2WMdc0=
