@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Camiel on 06-Apr-16.
+ * Created by user on 06-Apr-16.
  */
 public class RemoveDialog {
     private static boolean remove;

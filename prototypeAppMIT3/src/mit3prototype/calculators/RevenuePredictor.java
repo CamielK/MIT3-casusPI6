@@ -1,7 +1,7 @@
 package mit3prototype.calculators;
 
 /**
- * Created by Camiel on 07-Apr-16.
+ * Created by user on 07-Apr-16.
  */
 public class RevenuePredictor {
 }

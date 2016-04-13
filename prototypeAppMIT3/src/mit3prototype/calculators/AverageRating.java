@@ -9,7 +9,7 @@ import java.util.List;
 import mit3prototype.data.dataReaders.RatingCalcDbReader;
 
 /**
- * Created by Camiel on 07-Apr-16.
+ * Created by user on 07-Apr-16.
  */
 public class AverageRating {
 

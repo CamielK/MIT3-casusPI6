@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * Created by Camiel on 06-Apr-16.
+ * Created by user on 06-Apr-16.
  */
 public class Continent {
 

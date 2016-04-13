@@ -1,24 +1,14 @@
 package mit3prototype.GUI;
 
 import javafx.application.Platform;
-import mit3prototype.calculators.AverageRating;
-import mit3prototype.calculators.PredictedRating;
-import mit3prototype.calculators.RatingPredictor;
-import mit3prototype.calculators.RevenuePredictor;
+import mit3prototype.calculators.*;
 import mit3prototype.inputControllers.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.*;
@@ -77,8 +67,6 @@ public class GUIcontroller implements Initializable {
     private static Writer writerController = new Writer();
     private static Cast castController = new Cast();
     private static AverageRating avgRatingCalculator = new AverageRating();
-    private static RatingPredictor ratingPredictor = new RatingPredictor();
-    private static RevenuePredictor revenuePredictor = new RevenuePredictor();
 
     // >>> output components <<<
     @FXML private static ProgressBar progress;
@@ -438,10 +426,7 @@ public class GUIcontroller implements Initializable {
             //call multiple linear regression method to get predicted imdb rating
             progressStatus.setText("Executing multiple linear regression for imdb rating");
             progress.setProgress(0.5);
-            new PredictedRating(inputData, inputDataFloat).start();
-
-           // float predictedImdbRating = ratingPredictor.getPredictedRating(inputData, inputDataFloat);
-            //ratingOutput.setText(String.format("%.1f", (predictedImdbRating)));
+            new RatingPredictor(inputData, inputDataFloat, true).start();
 
             //call multiple linear regression method to get predicted revenue
             progressStatus.setText("Executing multiple linear regression for revenue");

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by Camiel on 08-Apr-16.
+ * Created by user on 08-Apr-16.
  */
 public class RatingCalcDbReader implements TableReader {
 

@@ -6,14 +6,12 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by Camiel on 08-Apr-16.
+ * Created by user on 08-Apr-16.
  */
 public class MainDbReader implements TableReader {
 
@@ -93,4 +91,41 @@ public class MainDbReader implements TableReader {
         return v;
     }
 
+
+
+    //get all records from the mainDatabase
+    private ResultSet getTrainingData() {
+        ResultSet trainingData = null;
+
+        //query
+        try {
+            //load driver
+            Class.forName("org.relique.jdbc.csv.CsvDriver");
+
+            //configure database connection
+            Connection conn = null;
+
+            //get execution path to detect jar execution
+            String executionPath = this.getClass().getResource("/mit3prototype/data/mainDatabase.csv").toExternalForm();
+
+            //jar data connection
+            if (executionPath.startsWith("jar:")) {
+                conn = DriverManager.getConnection("jdbc:relique:csv:class:" + MainDbReader.class.getName());
+            }
+
+            //ide data connection
+            else if (executionPath.startsWith("file:")) {
+                String path = this.getClass().getResource("/mit3prototype/data").toExternalForm();
+                path = path.substring("file:".length());
+                conn = DriverManager.getConnection("jdbc:relique:csv:" + path);
+            }
+
+            //do the query
+            conn.setAutoCommit(false);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM mainDatabase");
+            trainingData = stmt.executeQuery();
+
+        } catch (Exception e) { e.printStackTrace(); }
+        return trainingData;
+    }
 }

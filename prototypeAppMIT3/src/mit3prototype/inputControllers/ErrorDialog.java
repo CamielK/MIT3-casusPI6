@@ -12,7 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Created by Camiel on 10-Apr-16.
+ * Created by user on 10-Apr-16.
  */
 public class ErrorDialog {
 
