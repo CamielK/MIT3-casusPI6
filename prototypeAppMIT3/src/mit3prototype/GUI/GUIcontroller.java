@@ -2,6 +2,7 @@ package mit3prototype.GUI;
 
 import javafx.application.Platform;
 import javafx.scene.text.Text;
+import mit3prototype.Dialogs.ErrorDialog;
 import mit3prototype.Dialogs.HelpDialog;
 import mit3prototype.Dialogs.OutputDetailDialog;
 import mit3prototype.Dialogs.RemoveDialog;

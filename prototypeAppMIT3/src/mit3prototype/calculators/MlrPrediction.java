@@ -59,7 +59,7 @@ public class MlrPrediction extends Thread {
             //put input data into MLRdata array at correct index and creating dummys
             generateMlrData();
 
-            //count used predictor variables
+            //count used predictor variables-
             int usedPredictorCount = 0;
             for (int i = 0; i < 47; i++) {
                 if (MLRdata.get(i) != null) {

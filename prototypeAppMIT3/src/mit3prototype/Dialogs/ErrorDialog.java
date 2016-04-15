@@ -1,4 +1,4 @@
-package mit3prototype.inputControllers;
+package mit3prototype.Dialogs;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
